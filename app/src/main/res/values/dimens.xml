@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="margin_left">15dp</dimen>
+    <dimen name="margin_right">15dp</dimen>
+    <!--顶部导航栏 字体大小-->
+    <dimen name="top_title_bar">18sp</dimen>
+    <!--顶部二级导航栏 字体大小-->
+    <dimen name="sub_title_bar">15sp</dimen>
+    <!--列表相关-->
+    <dimen name="list_title">13sp</dimen>
+    <dimen name="list_content">12sp</dimen>
+    <!--卡片相关-->
+    <dimen name="card_title">15sp</dimen>
+    <dimen name="card_content">12sp</dimen>
+    <!--底部导航-->
+    <dimen name="bottom_navigation">10sp</dimen>
+    <!--分割线-->
+    <dimen name="divider">1dp</dimen>
+    <dimen name="divider_block">8dp</dimen>
+
+</resources>

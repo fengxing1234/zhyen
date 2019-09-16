@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="RenderScript方式实现高斯模糊"
+        android:textColor="@color/textColorPrimary" />
+
+    <Button
+        android:id="@+id/btn_blur_test_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="高斯模糊" />
+
+    <Button
+        android:id="@+id/btn_blur_test_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="高斯模糊半径" />
+
+    <Button
+        android:id="@+id/btn_blur_test_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="仿雅虎天气" />
+</LinearLayout>
