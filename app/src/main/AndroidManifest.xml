@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhyen.android">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,8 +23,23 @@
         <activity android:name=".test.test_blur.TestDynamicBlurActivity" />
         <activity android:name=".test.test_blur.BlurWeatherActivity" />
         <activity android:name=".test.test_luban.LuBanMainActivity" />
-        <activity android:name=".test.TestCompressorActivity"/>
-        <activity android:name=".test.test_widget.TestCircularImageView"/>
+        <activity android:name=".test.TestCompressorActivity" />
+        <activity android:name=".test.test_widget.TestCircularImageView" />
+        <activity android:name=".test.test_utils.TestUtilsActivity" />
+        <activity android:name=".test.test_provider.TestProviderActivity"/>
+        <provider
+            android:name=".test.test_provider.TestPictureProvider"
+            android:authorities="com.zhyen.android.TestPictureProvider"
+            android:enabled="true"
+            android:exported="false" />
     </application>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>
