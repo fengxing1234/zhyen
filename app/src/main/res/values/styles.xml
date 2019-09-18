@@ -15,4 +15,12 @@
 
     </style>
 
+    <style name="Selection.Dracula" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/dracula_primary</item>
+        <item name="bottomToolbar_preview_textColor">@color/dracula_bottom_toolbar_preview</item>
+        <item name="album_element_color">@android:color/white</item>
+        <item name="album_emptyView_textColor">@color/dracula_album_empty_view</item>
+        <item name="album_emptyView">@drawable/ic_empty_dracula</item>
+    </style>
+
 </resources>

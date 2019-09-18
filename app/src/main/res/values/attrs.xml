@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <attr name="bottomToolbar_preview_textColor" format="reference|color" />
+    <attr name="album_element_color" format="reference|color" />
+    <attr name="album_emptyView_textColor" format="reference|color" />
+    <attr name="album_emptyView" format="reference" />
+
     <declare-styleable name="BlurredView">
         <attr name="src" format="reference" />
         <attr name="move" format="boolean" />

@@ -15,7 +15,7 @@ public class TestSimpleBlurActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_simple_blur);
+        setContentView(R.layout.test_activity_simple_blur);
         ImageView imageView = (ImageView) findViewById(R.id.iv_test_blur);
         Drawable drawable = getResources().getDrawable(R.drawable.test_image);
         Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);

@@ -5,12 +5,12 @@
     android:layout_marginTop="36dp"
     android:background="#44000000"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_vertical_margin">
+    android:paddingLeft="@dimen/margin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/margin"
         android:text="WeatherInfo"
         android:textColor="@android:color/white"
         android:textSize="24sp" />
@@ -18,8 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
         android:text="Show more info"
         android:textColor="@android:color/white" />
 </LinearLayout>

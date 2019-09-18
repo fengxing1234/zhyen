@@ -76,7 +76,7 @@ public class BlurredView extends RelativeLayout {
 
     private void init(Context context) {
         mContext = context;
-        LayoutInflater.from(context).inflate(R.layout.blurredview, this);
+        LayoutInflater.from(context).inflate(R.layout.test_blurred_view, this);
         mOriginImg = (ImageView) findViewById(R.id.blurredview_origin_img);
         mBlurredImg = (ImageView) findViewById(R.id.blurredview_blurred_img);
     }

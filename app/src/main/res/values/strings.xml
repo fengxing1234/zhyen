@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">zhyen</string>
+    <string name="preview">预览</string>
+    <string name="employ">使用</string>
+    <string name="origin">原图</string>
+    <string name="empty_text">没有数据</string>
 </resources>

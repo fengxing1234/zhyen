@@ -15,7 +15,7 @@ public class BlurWeatherActivity extends AppCompatActivity {
 
 
     /**
-     * blurredview
+     * test_blurred_view
      */
     private BlurredView mBlurredView;
 
@@ -31,7 +31,7 @@ public class BlurWeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_blur_weather);
+        setContentView(R.layout.test_activity_blur_weather);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mBlurredView = (BlurredView) findViewById(R.id.yahooweather_blurredview);

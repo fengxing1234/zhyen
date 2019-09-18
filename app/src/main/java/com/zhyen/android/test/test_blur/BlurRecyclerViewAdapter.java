@@ -22,9 +22,9 @@ class BlurRecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return new HeaderHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_header, parent, false));
+            return new HeaderHolder(LayoutInflater.from(context).inflate(R.layout.test_blur_recyclerview_header, parent, false));
         }
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.test_blur_recyclerview_item, parent, false));
     }
 
     @Override

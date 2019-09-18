@@ -30,7 +30,7 @@ public class TestDynamicBlurActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_dynamic_blur);
+        setContentView(R.layout.test_activity_dynamic_blur);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // 初始化视图

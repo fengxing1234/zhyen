@@ -12,7 +12,7 @@ public class TestBlurActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_blur);
+        setContentView(R.layout.test_activity_blur);
         findViewById(R.id.btn_blur_test_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

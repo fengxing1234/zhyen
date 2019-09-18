@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--图片选择器相关-->
+    <color name="dracula_primary">#263237</color>
+    <color name="picture_item_checkCircle_backgroundColor">#1E8AE8</color>
+    <color name="picture_check_original_radio_disable">#808080</color>
+    <color name="dracula_bottom_toolbar_preview">#DEFFFFFF</color>
+    <color name="dracula_album_empty_view">#4DFFFFFF</color>
+</resources>
