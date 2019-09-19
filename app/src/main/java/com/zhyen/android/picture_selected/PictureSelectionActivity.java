@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +52,7 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
         mSpec = SelectionSpec.getInstance();
         setTheme(R.style.Selection_Dracula);
         setContentView(R.layout.activity_picture_selection);
@@ -61,12 +63,12 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
         Drawable navigationIcon = toolbar.getNavigationIcon();
         TypedArray ta = getTheme().obtainStyledAttributes(new int[]{R.attr.album_element_color});
-        int color = ta.getColor(0, 0);
+        final int color = ta.getColor(0, 0);
         ta.recycle();
         navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
@@ -94,7 +96,9 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
         albumsSpinner.setOnClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                mAlbumCollection.setStateCurrentSelection(position);
+                adapter.getCursor().moveToPosition(position);
+                onAlbumSelected(adapter.getCursor());
             }
         });
         albumsSpinner.setPopupAnchorView(findViewById(R.id.toolbar));
@@ -103,6 +107,13 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
         mAlbumCollection.onCreate(this, this);
         mAlbumCollection.onRestoreInstanceState(savedInstanceState);
         mAlbumCollection.loadAlbums();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mSelectedCollection.onSaveInstanceState(outState);
+        mAlbumCollection.onSaveInstanceState(outState);
     }
 
     private void updateBottomToolbar() {
@@ -144,16 +155,16 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
                 cursor.moveToPosition(mAlbumCollection.getCurrentSelection());
                 albumsSpinner.setSelection(PictureSelectionActivity.this,
                         mAlbumCollection.getCurrentSelection());
-                Album album = Album.valueOf(cursor);
-                if (album.isAll() && SelectionSpec.getInstance().capture) {
-                    album.addCaptureCount();
-                }
-                onAlbumSelected(album);
+                onAlbumSelected(cursor);
             }
         });
     }
 
-    private void onAlbumSelected(Album album) {
+    private void onAlbumSelected(Cursor cursor) {
+        Album album = Album.valueOf(cursor);
+        if (album.isAll() && SelectionSpec.getInstance().capture) {
+            album.addCaptureCount();
+        }
         if (album.isAll() && album.isEmpty()) {
             mContainer.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
@@ -186,5 +197,12 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
     public void onBackPressed() {
         setResult(Activity.RESULT_CANCELED);
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+        mAlbumCollection.onDestroy();
     }
 }

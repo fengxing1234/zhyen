@@ -17,6 +17,7 @@ public class SelectedItemCollection {
      * Empty collection
      */
     public static final int COLLECTION_UNDEFINED = 0x00;
+    private static final String TAG = SelectedItemCollection.class.getSimpleName();
 
     private LinkedList<Item> mItems;
     private int mCollectionType;
@@ -30,6 +31,9 @@ public class SelectedItemCollection {
             mItems = new LinkedList<>();
         } else {
             ArrayList<Item> list = bundle.getParcelableArrayList(STATE_SELECTION);
+            if (list == null) {
+                list = new ArrayList<>();
+            }
             mItems = new LinkedList<>(list);
             mCollectionType = bundle.getInt(STATE_COLLECTION_TYPE, COLLECTION_UNDEFINED);
         }
@@ -37,5 +41,9 @@ public class SelectedItemCollection {
 
     public int count() {
         return 5;
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+
     }
 }

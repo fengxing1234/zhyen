@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 import com.zhyen.android.picture_selected.loader.AlbumLoader;
 
@@ -15,10 +16,14 @@ import java.lang.ref.WeakReference;
 
 public class AlbumCollection implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final String STATE_CURRENT_SELECTION = "state_current_selection";
+    private static final int LOADER_ID = 1;
+    private static final String TAG = AlbumCollection.class.getSimpleName();
     private WeakReference<Context> context;
     private LoaderManager loaderManager;
     private AlbumCallbacks callbacks;
     private boolean mLoadFinished;
+    private int mCurrentSelection;
 
     public void onCreate(FragmentActivity activity, AlbumCallbacks callbacks) {
         context = new WeakReference<Context>(activity);
@@ -26,12 +31,21 @@ public class AlbumCollection implements LoaderManager.LoaderCallbacks<Cursor> {
         this.callbacks = callbacks;
     }
 
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_CURRENT_SELECTION, mCurrentSelection);
+        Log.d(TAG, "onSaveInstanceState: " + mCurrentSelection);
+    }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        mCurrentSelection = savedInstanceState.getInt(STATE_CURRENT_SELECTION);
+        Log.d(TAG, "onRestoreInstanceState: " + mCurrentSelection);
     }
 
     public void loadAlbums() {
-        loaderManager.initLoader(0, null, this);
+        loaderManager.initLoader(LOADER_ID, null, this);
     }
 
     @NonNull
@@ -66,7 +80,18 @@ public class AlbumCollection implements LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     public int getCurrentSelection() {
-        return 0;
+        return mCurrentSelection;
+    }
+
+    public void setStateCurrentSelection(int currentSelection) {
+        mCurrentSelection = currentSelection;
+    }
+
+    public void onDestroy() {
+        if (loaderManager != null) {
+            loaderManager.destroyLoader(LOADER_ID);
+        }
+        callbacks = null;
     }
 
     public interface AlbumCallbacks {
