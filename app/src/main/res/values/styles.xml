@@ -18,9 +18,21 @@
     <style name="Selection.Dracula" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/dracula_primary</item>
         <item name="bottomToolbar_preview_textColor">@color/dracula_bottom_toolbar_preview</item>
+        <item name="bottomToolbar_apply_textColor">@color/dracula_bottom_toolbar_apply_selector
+        </item>
         <item name="album_element_color">@android:color/white</item>
         <item name="album_emptyView_textColor">@color/dracula_album_empty_view</item>
         <item name="album_emptyView">@drawable/ic_empty_dracula</item>
+        <item name="album_thumbnail_placeholder">
+            @color/dracula_album_dropdown_thumbnail_placeholder
+        </item>
+        <item name="album_dropdown_title_color">@color/album_dropdown_title_color</item>
+        <item name="album_dropdown_count_color">@color/album_dropdown_count_color</item>
+        <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
+    </style>
+
+    <style name="Popup.Dracula" parent="Widget.AppCompat.ListPopupWindow">
+        <item name="android:popupBackground">@color/dracula_album_popup_bg</item>
     </style>
 
 </resources>

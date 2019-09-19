@@ -19,4 +19,9 @@
     <dimen name="divider">1dp</dimen>
     <dimen name="divider_block">8dp</dimen>
 
+
+    <!--图片选择器的样式-->
+    <dimen name="media_grid_size">48dp</dimen>
+    <dimen name="album_item_height">72dp</dimen>
+
 </resources>

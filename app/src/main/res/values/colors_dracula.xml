@@ -6,4 +6,10 @@
     <color name="picture_check_original_radio_disable">#808080</color>
     <color name="dracula_bottom_toolbar_preview">#DEFFFFFF</color>
     <color name="dracula_album_empty_view">#4DFFFFFF</color>
+    <color name="dracula_bottom_toolbar_apply_text">#03A9F4</color>
+    <color name="dracula_bottom_toolbar_apply_text_disable">#4D03A9F4</color>
+    <color name="dracula_album_dropdown_thumbnail_placeholder">#455A64</color>
+    <color name="album_dropdown_title_color">#DE000000</color>
+    <color name="album_dropdown_count_color">#999999</color>
+    <color name="dracula_album_popup_bg">#34474E</color>
 </resources>

@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">zhyen</string>
     <string name="preview">预览</string>
-    <string name="employ">使用</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
     <string name="origin">原图</string>
     <string name="empty_text">没有数据</string>
+    <string name="all">全部</string>
 </resources>

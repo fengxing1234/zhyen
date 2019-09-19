@@ -74,13 +74,14 @@
 
 
         <TextView
-            android:id="@+id/tv_employ"
+            android:id="@+id/tv_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:foreground="?selectableItemBackground"
             android:padding="@dimen/margin"
-            android:text="@string/employ"
+            android:text="@string/button_apply_default"
+            android:textColor="?bottomToolbar_apply_textColor"
             android:textSize="16sp" />
     </FrameLayout>
 

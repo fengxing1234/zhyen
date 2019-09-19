@@ -97,7 +97,7 @@ public class ScreenUtils {
         return manager.getDefaultDisplay().getRotation();
     }
 
-    public static double getDensity(Context context) {
+    public static float getDensity(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         Log.d(TAG, "getDensity: " + density);
         return density;
