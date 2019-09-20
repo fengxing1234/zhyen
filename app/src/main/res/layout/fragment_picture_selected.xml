@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--   clipChildren 是否限制子View在其范围内 我们将其值设置为false后那么当子控件的高度高于父控件时也会完全显示,而不会被压缩 。-->
+    <!--  clipToPadding  表示控件的绘制区域是否在padding里面的，true的情况下如果你设置了padding那么绘制的区域就往里缩，false则表示滑动时忽略padding的值。系统默认是true。-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="true"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+</FrameLayout>

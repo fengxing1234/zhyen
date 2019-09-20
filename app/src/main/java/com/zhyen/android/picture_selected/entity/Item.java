@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Item implements Parcelable {
+    public static final int ITEM_ID_CAPTURE = -1;
+    public static final String ITEM_DISPLAY_NAME_CAPTURE = "Capture";
+
     protected Item(Parcel in) {
     }
 

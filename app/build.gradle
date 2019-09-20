@@ -21,15 +21,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation rootProject.ext.support.SupportV7
-    implementation rootProject.ext.support.SupportRecyclerviewV7
-    implementation rootProject.ext.support.constraintLayout
+    implementation rootProject.ext.androidX.appcompat
+    implementation rootProject.ext.androidX.constraintlayout
+    implementation rootProject.ext.androidX.recyclerview
 
-    implementation "com.github.bumptech.glide:glide:$rootProject.ext.dependencies.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.dependencies.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.version.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.version.glideVersion"
 
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.dependencies.RxjavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.dependencies.RxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.version.RxjavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.version.RxAndroidVersion"
 
 
 }

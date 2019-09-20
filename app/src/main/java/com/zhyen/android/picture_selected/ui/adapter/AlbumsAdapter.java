@@ -45,12 +45,12 @@ public class AlbumsAdapter extends CursorAdapter {
         TextView tvAlbumCount = view.findViewById(R.id.tv_album_count);
 
         tvAlbumName.setText(album.getDisplayName(context));
-        tvAlbumCount.setText(String.valueOf(album.mCount));
+        tvAlbumCount.setText(String.valueOf(album.count));
 
         int resize = context.getResources().getDimensionPixelSize(R.dimen.media_grid_size);
         Glide.with(context)
                 .asBitmap()  // some .jpeg files are actually gif
-                .load(Uri.fromFile(new File(album.mCoverPath)))
+                .load(Uri.fromFile(new File(album.coverPath)))
                 .placeholder(placeholder)
                 .override(resize, resize)
                 .centerCrop()

@@ -29,6 +29,10 @@ public class SelectionSpec {
     public boolean originEnable = true;
     //显示拍照按钮
     public boolean capture;
+    //grid尺寸 与 spanCount 设置一个即可
+    public int gridExpectedSize;
+    //一行显示几张图片
+    public int spanCount = 3;
 
     private SelectionSpec() {
 

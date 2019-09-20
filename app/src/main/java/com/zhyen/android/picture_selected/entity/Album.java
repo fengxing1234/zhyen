@@ -2,27 +2,48 @@ package com.zhyen.android.picture_selected.entity;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.loader.AlbumLoader;
 
-public class Album {
+public class Album implements Parcelable {
 
     public static final String ALBUM_ID_ALL = String.valueOf(-1);
     public static final String ALBUM_NAME_ALL = "All";
 
-    public String mId;
-    public String mCoverPath;
-    public String mDisplayName;
-    public long mCount;
+    public String id;
+    public String coverPath;
+    public String displayName;
+    public long count;
 
     public Album(String id, String data, String displayName, long count) {
-        this.mId = id;
-        this.mCoverPath = data;
-        this.mDisplayName = displayName;
-        this.mCount = count;
+        this.id = id;
+        this.coverPath = data;
+        this.displayName = displayName;
+        this.count = count;
     }
+
+    protected Album(Parcel in) {
+        id = in.readString();
+        coverPath = in.readString();
+        displayName = in.readString();
+        count = in.readLong();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     public static Album valueOf(Cursor cursor) {
         return new Album(
@@ -33,21 +54,34 @@ public class Album {
     }
 
     public void addCaptureCount() {
-        mCount++;
+        count++;
     }
 
     public String getDisplayName(Context context) {
         if (isAll()) {
             return context.getString(R.string.all);
         }
-        return mDisplayName;
+        return displayName;
     }
 
     public boolean isAll() {
-        return ALBUM_ID_ALL.equals(mId);
+        return ALBUM_ID_ALL.equals(id);
     }
 
     public boolean isEmpty() {
-        return mCount == 0;
+        return count == 0;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(coverPath);
+        dest.writeString(displayName);
+        dest.writeLong(count);
     }
 }
