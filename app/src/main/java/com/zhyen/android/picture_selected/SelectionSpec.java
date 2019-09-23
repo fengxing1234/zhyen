@@ -1,5 +1,12 @@
 package com.zhyen.android.picture_selected;
 
+import com.zhyen.android.picture_selected.engine.ImageEngine;
+import com.zhyen.android.picture_selected.engine.impl.GlideEngine;
+import com.zhyen.android.picture_selected.filter.Filter;
+
+import java.util.List;
+import java.util.Set;
+
 /**
  * unspecified	默认值。系统自动选择屏幕方向
  * behind	跟activity堆栈中的下面一个activity的方向一致
@@ -33,6 +40,10 @@ public class SelectionSpec {
     public int gridExpectedSize;
     //一行显示几张图片
     public int spanCount = 3;
+    public ImageEngine imageEngine = new GlideEngine();
+    public float thumbnailScale = 0.5f;
+    public Set<MimeType> mimeTypeSet;
+    public List<Filter> filters;
 
     private SelectionSpec() {
 

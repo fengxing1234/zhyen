@@ -22,6 +22,7 @@ import com.zhyen.android.picture_selected.SelectionSpec;
 import com.zhyen.android.picture_selected.entity.Album;
 import com.zhyen.android.picture_selected.model.AlbumMediaCollection;
 import com.zhyen.android.picture_selected.ui.adapter.AlbumPictureAdapter;
+import com.zhyen.android.picture_selected.ui.widget.MediaGridInset;
 import com.zhyen.android.utils.UIUtils;
 
 public class MediaSelectionFragment extends Fragment implements AlbumMediaCollection.AlbumMediaCallbacks {
@@ -65,7 +66,7 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
         super.onActivityCreated(savedInstanceState);
         Album album = getArguments().getParcelable(EXTRA_ALBUM);
         Log.d(TAG, "onActivityCreated: " + album.getDisplayName(getContext()));
-        mAdapter = new AlbumPictureAdapter();
+        mAdapter = new AlbumPictureAdapter(getContext(), null, mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mSelectionSpec = SelectionSpec.getInstance();
         int spanCount;
@@ -75,6 +76,8 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
             spanCount = mSelectionSpec.spanCount;
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
+        int spacing = getResources().getDimensionPixelSize(R.dimen.media_grid_spacing);
+        mRecyclerView.addItemDecoration(new MediaGridInset(spanCount, spacing, false));
         mRecyclerView.setAdapter(mAdapter);
         mCollection.onCreate(getActivity(), this);
         mCollection.load(album);
@@ -93,6 +96,7 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
 
     @Override
     public void onLoadFinish(Loader<Cursor> loader, Cursor cursor) {
+        mAdapter.swapCursor(cursor);
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
             Log.d(TAG, "onLoadFinish: " + name);
@@ -101,6 +105,6 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursor) {
-
+        mAdapter.swapCursor(null);
     }
 }

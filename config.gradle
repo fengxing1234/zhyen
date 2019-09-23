@@ -23,6 +23,7 @@ ext {
             glideVersion           : "4.9.0",
             RxjavaVersion          : "2.2.12",
             RxAndroidVersion       : "2.1.1",
+            picasso                : "2.5.2",
     ]
 
     //已弃用

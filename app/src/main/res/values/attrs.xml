@@ -9,7 +9,9 @@
     <attr name="album_thumbnail_placeholder" format="reference|color" />
     <attr name="album_dropdown_title_color" format="reference|color" />
     <attr name="album_dropdown_count_color" format="reference|color" />
-    <attr name="listPopupWindowStyle" format="reference"/>
+    <attr name="listPopupWindowStyle" format="reference" />
+    <attr name="item_placeholder" format="reference|color" />
+    <attr name="capture_textColor" format="reference|color" />
 
     <declare-styleable name="BlurredView">
         <attr name="src" format="reference" />

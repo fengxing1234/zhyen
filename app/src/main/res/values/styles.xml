@@ -29,6 +29,8 @@
         <item name="album_dropdown_title_color">@color/album_dropdown_title_color</item>
         <item name="album_dropdown_count_color">@color/album_dropdown_count_color</item>
         <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
+        <item name="item_placeholder">@color/dracula_item_placeholder</item>
+        <item name="capture_textColor">@color/dracula_capture</item>
     </style>
 
     <style name="Popup.Dracula" parent="Widget.AppCompat.ListPopupWindow">

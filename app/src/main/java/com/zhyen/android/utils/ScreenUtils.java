@@ -102,4 +102,8 @@ public class ScreenUtils {
         Log.d(TAG, "getDensity: " + density);
         return density;
     }
+
+    public static int screenWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
 }
