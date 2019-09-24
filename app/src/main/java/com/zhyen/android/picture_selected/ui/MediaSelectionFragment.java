@@ -4,7 +4,6 @@ package com.zhyen.android.picture_selected.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,15 +114,13 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
 
     @Override
     public void onLoadFinish(Loader<Cursor> loader, Cursor cursor) {
+        Log.d(TAG, "onLoadFinish: ");
         mAdapter.swapCursor(cursor);
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
-            Log.d(TAG, "onLoadFinish: " + name);
-        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursor) {
+        Log.d(TAG, "onLoaderReset: ");
         mAdapter.swapCursor(null);
     }
 

@@ -12,8 +12,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zhyen.android.R;
+import com.zhyen.android.picture_selected.SelectionSpec;
 import com.zhyen.android.picture_selected.entity.Album;
 
 import java.io.File;
@@ -26,7 +26,7 @@ public class AlbumsAdapter extends CursorAdapter {
     //autoRequery 当数据库更新，cursor是否更新
     public AlbumsAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
-        TypedArray ta = context.obtainStyledAttributes(new int[]{R.attr.album_thumbnail_placeholder});
+        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{R.attr.album_thumbnail_placeholder});
         placeholder = ta.getDrawable(0);
         ta.recycle();
     }
@@ -48,12 +48,7 @@ public class AlbumsAdapter extends CursorAdapter {
         tvAlbumCount.setText(String.valueOf(album.count));
 
         int resize = context.getResources().getDimensionPixelSize(R.dimen.media_grid_size);
-        Glide.with(context)
-                .asBitmap()  // some .jpeg files are actually gif
-                .load(Uri.fromFile(new File(album.coverPath)))
-                .placeholder(placeholder)
-                .override(resize, resize)
-                .centerCrop()
-                .into(ivAlbumCover);
+        SelectionSpec.getInstance().imageEngine.loadThumbnail(context, resize, placeholder,
+                ivAlbumCover, Uri.fromFile(new File(album.coverPath)));
     }
 }

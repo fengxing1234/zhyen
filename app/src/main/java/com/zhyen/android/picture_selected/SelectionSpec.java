@@ -2,6 +2,7 @@ package com.zhyen.android.picture_selected;
 
 import com.zhyen.android.picture_selected.engine.ImageEngine;
 import com.zhyen.android.picture_selected.engine.impl.GlideEngine;
+import com.zhyen.android.picture_selected.entity.CaptureStrategy;
 import com.zhyen.android.picture_selected.filter.Filter;
 import com.zhyen.android.picture_selected.listener.OnSelectedListener;
 
@@ -47,6 +48,7 @@ public class SelectionSpec {
     public List<Filter> filters;
     public boolean mediaTypeExclusive;
     public OnSelectedListener onSelectedListener;
+    public CaptureStrategy captureStrategy = new CaptureStrategy(true, "com.zhyen.android.fileprovider", "嗯嗯");
 
     private SelectionSpec() {
 

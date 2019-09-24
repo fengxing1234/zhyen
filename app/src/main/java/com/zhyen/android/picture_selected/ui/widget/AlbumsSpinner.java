@@ -5,16 +5,17 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.entity.Album;
-import com.zhyen.android.utils.ScreenUtils;
+import com.zhyen.android.picture_selected.util.Platform;
 
 /**
  * 1、查看源码，会发现PopupMenu和Spinner内部都是使用ListPopupWindow实现下拉列表效果，所以ListPopupWindow是基础。
@@ -25,76 +26,43 @@ import com.zhyen.android.utils.ScreenUtils;
  */
 public class AlbumsSpinner {
 
-    private ListPopupWindow popupWindow;
+    private static final int MAX_SHOWN_COUNT = 6;
     private CursorAdapter mAdapter;
     private TextView mSelected;
-    private AdapterView.OnItemClickListener onItemClickListener;
-    private static final int MAX_SHOWN_COUNT = 6;
+    private ListPopupWindow mListPopupWindow;
+    private AdapterView.OnItemSelectedListener mOnItemSelectedListener;
 
-    public AlbumsSpinner(Context context) {
-        popupWindow = new ListPopupWindow(context, null, R.attr.listPopupWindowStyle);
-        double density = ScreenUtils.getDensity(context);
-        popupWindow.setContentWidth((int) (216 * density));
-        popupWindow.setHorizontalOffset((int) (16 * density));
-        popupWindow.setVerticalOffset((int) (-48 * density));
-        popupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public AlbumsSpinner(@NonNull Context context) {
+        mListPopupWindow = new ListPopupWindow(context, null, R.attr.listPopupWindowStyle);
+        mListPopupWindow.setModal(true);
+        float density = context.getResources().getDisplayMetrics().density;
+        mListPopupWindow.setContentWidth((int) (216 * density));
+        mListPopupWindow.setHorizontalOffset((int) (16 * density));
+        mListPopupWindow.setVerticalOffset((int) (-48 * density));
+
+        mListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setSelection(parent.getContext(), position);
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(parent, view, position, id);
+                AlbumsSpinner.this.onItemSelected(parent.getContext(), position);
+                if (mOnItemSelectedListener != null) {
+                    mOnItemSelectedListener.onItemSelected(parent, view, position, id);
                 }
             }
         });
     }
 
-    public void setOnClickListener(AdapterView.OnItemClickListener listener) {
-        this.onItemClickListener = listener;
-    }
-
-    public void setAdapter(CursorAdapter adapter) {
-        popupWindow.setAdapter(adapter);
-        mAdapter = adapter;
-    }
-
-    public void setPopupAnchorView(View view) {
-        popupWindow.setAnchorView(view);
-    }
-
-
-    public void setSelectedTextView(TextView textView) {
-        mSelected = textView;
-        //设置下图片颜色
-        Drawable[] compoundDrawables = mSelected.getCompoundDrawables();
-        Drawable rightDrawable = compoundDrawables[2];
-        TypedArray ta = mSelected.getContext().getTheme().obtainStyledAttributes(
-                new int[]{R.attr.album_element_color});
-        int color = ta.getColor(0, 0);
-        ta.recycle();
-        rightDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-
-        mSelected.setVisibility(View.GONE);
-        mSelected.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //只显示6项 多了就下拉显示
-                int height = v.getResources().getDimensionPixelSize(R.dimen.album_item_height);
-                popupWindow.setHeight(mAdapter.getCount() > MAX_SHOWN_COUNT ? height * MAX_SHOWN_COUNT : mAdapter.getCount() * height);
-                popupWindow.show();
-            }
-        });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mSelected.setOnTouchListener(popupWindow.createDragToOpenListener(mSelected));
-        }
+    public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
+        mOnItemSelectedListener = listener;
     }
 
     public void setSelection(Context context, int position) {
-        popupWindow.setSelection(position);
+        mListPopupWindow.setSelection(position);
         onItemSelected(context, position);
     }
 
     private void onItemSelected(Context context, int position) {
-        popupWindow.dismiss();
+        mListPopupWindow.dismiss();
         Cursor cursor = mAdapter.getCursor();
         cursor.moveToPosition(position);
         Album album = Album.valueOf(cursor);
@@ -102,12 +70,53 @@ public class AlbumsSpinner {
         if (mSelected.getVisibility() == View.VISIBLE) {
             mSelected.setText(displayName);
         } else {
-            //渐变动画显示出来
-            mSelected.setAlpha(0.0f);
-            mSelected.setVisibility(View.VISIBLE);
-            mSelected.setText(displayName);
-            mSelected.animate().alpha(1.0f).setDuration(context.getResources().getInteger(android.R.integer.config_longAnimTime)).start();
-        }
+            if (Platform.hasICS()) {
+                mSelected.setAlpha(0.0f);
+                mSelected.setVisibility(View.VISIBLE);
+                mSelected.setText(displayName);
+                mSelected.animate().alpha(1.0f).setDuration(context.getResources().getInteger(
+                        android.R.integer.config_longAnimTime)).start();
+            } else {
+                mSelected.setVisibility(View.VISIBLE);
+                mSelected.setText(displayName);
+            }
 
+        }
     }
+
+    public void setAdapter(CursorAdapter adapter) {
+        mListPopupWindow.setAdapter(adapter);
+        mAdapter = adapter;
+    }
+
+    public void setSelectedTextView(TextView textView) {
+        mSelected = textView;
+        // tint dropdown arrow icon
+        Drawable[] drawables = mSelected.getCompoundDrawables();
+        Drawable right = drawables[2];
+        TypedArray ta = mSelected.getContext().getTheme().obtainStyledAttributes(
+                new int[]{R.attr.album_element_color});
+        int color = ta.getColor(0, 0);
+        ta.recycle();
+        right.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+        mSelected.setVisibility(View.GONE);
+        mSelected.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                int itemHeight = v.getResources().getDimensionPixelSize(R.dimen.album_item_height);
+                mListPopupWindow.setHeight(
+                        mAdapter.getCount() > MAX_SHOWN_COUNT ? itemHeight * MAX_SHOWN_COUNT
+                                : itemHeight * mAdapter.getCount());
+                mListPopupWindow.show();
+            }
+        });
+        mSelected.setOnTouchListener(mListPopupWindow.createDragToOpenListener(mSelected));
+    }
+
+    public void setPopupAnchorView(View view) {
+        mListPopupWindow.setAnchorView(view);
+    }
+
 }

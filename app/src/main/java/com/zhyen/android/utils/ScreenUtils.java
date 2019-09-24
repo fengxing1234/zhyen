@@ -99,7 +99,7 @@ public class ScreenUtils {
 
     public static float getDensity(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
-        Log.d(TAG, "getDensity: " + density);
+        //Log.d(TAG, "getDensity: " + density);
         return density;
     }
 

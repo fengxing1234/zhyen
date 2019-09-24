@@ -138,4 +138,9 @@ public class AlbumLoader extends CursorLoader {
         matrixCursor.addRow(new String[]{Album.ALBUM_ID_ALL, Album.ALBUM_ID_ALL, Album.ALBUM_NAME_ALL, allAlbumCoverPath, "", String.valueOf(totalCount)});
         return new MergeCursor(new Cursor[]{matrixCursor, cursor});
     }
+
+    @Override
+    public void onContentChanged() {
+        // FIXME a dirty way to fix loading multiple times
+    }
 }

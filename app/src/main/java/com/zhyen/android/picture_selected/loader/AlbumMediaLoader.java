@@ -16,6 +16,7 @@ import androidx.loader.content.Loader;
 import com.zhyen.android.picture_selected.SelectionSpec;
 import com.zhyen.android.picture_selected.entity.Album;
 import com.zhyen.android.picture_selected.entity.Item;
+import com.zhyen.android.picture_selected.util.MediaStoreCompat;
 
 
 public class AlbumMediaLoader extends CursorLoader {
@@ -166,7 +167,7 @@ public class AlbumMediaLoader extends CursorLoader {
     @Override
     public Cursor loadInBackground() {
         Cursor cursor = super.loadInBackground();
-        if (!enableCapture) {
+        if (!enableCapture || !MediaStoreCompat.hasCameraFeature(getContext())) {
             return cursor;
         }
         MatrixCursor matrixCursor = new MatrixCursor(PROJECTION);

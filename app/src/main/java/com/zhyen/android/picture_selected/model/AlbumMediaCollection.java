@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
 import com.zhyen.android.picture_selected.entity.Album;
@@ -45,10 +44,10 @@ public class AlbumMediaCollection implements LoaderManager.LoaderCallbacks<Curso
         Context context = mContext.get();
         if (context == null) {
             Log.d(TAG, "onCreateLoader: 页面已经关闭了");
-            return new CursorLoader(context);
+            return null;
         }
         if (bundle == null) {
-            return new CursorLoader(context);
+            return null;
         }
 
         Album album = bundle.getParcelable(ARGS_ALBUM);

@@ -1,7 +1,6 @@
 package com.zhyen.android.picture_selected.ui.widget;
 
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -26,7 +25,6 @@ public class MediaGridInset extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
         int column = position % mSpanCount;
-        Log.d(TAG, "getItemOffsets: position = " + position + "  column = " + column);
 
         if (mIncludeEdge) {
             // spacing - column * ((1f / spanCount) * spacing)
