@@ -20,15 +20,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.SelectionSpec;
 import com.zhyen.android.picture_selected.entity.Album;
+import com.zhyen.android.picture_selected.entity.Item;
 import com.zhyen.android.picture_selected.model.AlbumMediaCollection;
+import com.zhyen.android.picture_selected.model.SelectedItemCollection;
 import com.zhyen.android.picture_selected.ui.adapter.AlbumPictureAdapter;
 import com.zhyen.android.picture_selected.ui.widget.MediaGridInset;
 import com.zhyen.android.utils.UIUtils;
 
-public class MediaSelectionFragment extends Fragment implements AlbumMediaCollection.AlbumMediaCallbacks {
+public class MediaSelectionFragment extends Fragment implements AlbumMediaCollection.AlbumMediaCallbacks, AlbumPictureAdapter.CheckStateListener, AlbumPictureAdapter.OnMediaClickListener {
 
     public static final String TAG = MediaSelectionFragment.class.getSimpleName();
     public static final String EXTRA_ALBUM = "extra_album";
+
+    private AlbumPictureAdapter.CheckStateListener mCheckStateListener;
+    private AlbumPictureAdapter.OnMediaClickListener mOnMediaClickListener;
+    private SelectionProvider mSelectionProvider;
 
     private AlbumMediaCollection mCollection = new AlbumMediaCollection();
 
@@ -47,6 +53,17 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof SelectionProvider) {
+            mSelectionProvider = (SelectionProvider) context;
+        } else {
+            throw new IllegalStateException("Context must implement SelectionProvider.");
+        }
+        if (context instanceof AlbumPictureAdapter.CheckStateListener) {
+            mCheckStateListener = (AlbumPictureAdapter.CheckStateListener) context;
+        }
+        if (context instanceof AlbumPictureAdapter.OnMediaClickListener) {
+            mOnMediaClickListener = (AlbumPictureAdapter.OnMediaClickListener) context;
+        }
     }
 
     @Nullable
@@ -66,7 +83,9 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
         super.onActivityCreated(savedInstanceState);
         Album album = getArguments().getParcelable(EXTRA_ALBUM);
         Log.d(TAG, "onActivityCreated: " + album.getDisplayName(getContext()));
-        mAdapter = new AlbumPictureAdapter(getContext(), null, mRecyclerView);
+        mAdapter = new AlbumPictureAdapter(getContext(), mSelectionProvider.provideSelectedItemCollection(), mRecyclerView);
+        mAdapter.registerCheckStateListener(this);
+        mAdapter.registerOnMediaClickListener(this);
         mRecyclerView.setHasFixedSize(true);
         mSelectionSpec = SelectionSpec.getInstance();
         int spanCount;
@@ -106,5 +125,32 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
     @Override
     public void onLoaderReset(Loader<Cursor> cursor) {
         mAdapter.swapCursor(null);
+    }
+
+    public void refreshMediaGrid() {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void refreshSelection() {
+        mAdapter.refreshSelection();
+    }
+
+    @Override
+    public void onUpdate() {
+        if (mCheckStateListener != null) {
+            mCheckStateListener.onUpdate();
+        }
+    }
+
+    @Override
+    public void onMediaClick(Album album, Item item, int adapterPosition) {
+        if (mOnMediaClickListener != null) {
+            mOnMediaClickListener.onMediaClick((Album) getArguments().getParcelable(EXTRA_ALBUM),
+                    item, adapterPosition);
+        }
+    }
+
+    public interface SelectionProvider {
+        SelectedItemCollection provideSelectedItemCollection();
     }
 }

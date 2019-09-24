@@ -3,6 +3,7 @@ package com.zhyen.android.picture_selected;
 import com.zhyen.android.picture_selected.engine.ImageEngine;
 import com.zhyen.android.picture_selected.engine.impl.GlideEngine;
 import com.zhyen.android.picture_selected.filter.Filter;
+import com.zhyen.android.picture_selected.listener.OnSelectedListener;
 
 import java.util.List;
 import java.util.Set;
@@ -25,25 +26,27 @@ import java.util.Set;
 public class SelectionSpec {
 
     //选中的图片是否显示数字
-    public boolean countable;
+    public boolean countable = true;
     //可选择的最大数值 如：微信9张
-    public int maxSelectable;
+    public int maxSelectable = 9;
     //图像的最大可选计数。
-    public int maxImageSelectable;
+    public int maxImageSelectable = 5;
     //视频的最大可选计数。
-    public int maxVideoSelectable;
+    public int maxVideoSelectable = 5;
 
     public boolean originEnable = true;
     //显示拍照按钮
-    public boolean capture;
+    public boolean capture = true;
     //grid尺寸 与 spanCount 设置一个即可
     public int gridExpectedSize;
     //一行显示几张图片
     public int spanCount = 3;
     public ImageEngine imageEngine = new GlideEngine();
     public float thumbnailScale = 0.5f;
-    public Set<MimeType> mimeTypeSet;
+    public Set<MimeType> mimeTypeSet = MimeType.ofAll();
     public List<Filter> filters;
+    public boolean mediaTypeExclusive;
+    public OnSelectedListener onSelectedListener;
 
     private SelectionSpec() {
 

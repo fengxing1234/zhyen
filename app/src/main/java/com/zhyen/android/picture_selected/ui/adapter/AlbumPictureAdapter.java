@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.SelectionSpec;
 import com.zhyen.android.picture_selected.entity.Album;
+import com.zhyen.android.picture_selected.entity.IncapableCause;
 import com.zhyen.android.picture_selected.entity.Item;
 import com.zhyen.android.picture_selected.model.SelectedItemCollection;
 import com.zhyen.android.picture_selected.ui.widget.CheckView;
@@ -53,7 +54,7 @@ public class AlbumPictureAdapter extends RecyclerViewCursorAdapter<RecyclerView.
             CaptureViewHolder captureViewHolder = (CaptureViewHolder) holder;
             Drawable[] drawables = captureViewHolder.tvHint.getCompoundDrawables();
 
-            TypedArray ta = captureViewHolder.itemView.getContext().getTheme().obtainStyledAttributes(new int[R.attr.capture_textColor]);
+            TypedArray ta = captureViewHolder.itemView.getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.capture_textColor});
             int color = ta.getColor(0, 0);
             ta.recycle();
 
@@ -119,7 +120,35 @@ public class AlbumPictureAdapter extends RecyclerViewCursorAdapter<RecyclerView.
     }
 
     private void setCheckStatus(Item item, MediaGrid mediaGrid) {
-
+        if (mSelectionSpec.countable) {
+            int checkedNum = mSelectedCollection.checkedNumOf(item);
+            if (checkedNum > 0) {
+                mediaGrid.setCheckEnabled(true);
+                mediaGrid.setCheckedNum(checkedNum);
+            } else {
+                if (mSelectedCollection.maxSelectableReached()) {
+                    mediaGrid.setCheckEnabled(false);
+                    mediaGrid.setCheckedNum(CheckView.UNCHECKED);
+                } else {
+                    mediaGrid.setCheckEnabled(true);
+                    mediaGrid.setCheckedNum(checkedNum);
+                }
+            }
+        } else {
+            boolean selected = mSelectedCollection.isSelected(item);
+            if (selected) {
+                mediaGrid.setCheckEnabled(true);
+                mediaGrid.setChecked(true);
+            } else {
+                if (mSelectedCollection.maxSelectableReached()) {
+                    mediaGrid.setCheckEnabled(false);
+                    mediaGrid.setChecked(false);
+                } else {
+                    mediaGrid.setCheckEnabled(true);
+                    mediaGrid.setChecked(false);
+                }
+            }
+        }
     }
 
     private int getImageResize(Context context) {
@@ -136,12 +165,66 @@ public class AlbumPictureAdapter extends RecyclerViewCursorAdapter<RecyclerView.
 
     @Override
     public void onThumbnailClicked(ImageView thumbnail, Item item, RecyclerView.ViewHolder holder) {
-
+        if (mOnMediaClickListener != null) {
+            mOnMediaClickListener.onMediaClick(null, item, holder.getAdapterPosition());
+        }
     }
 
     @Override
     public void onCheckViewClicked(CheckView checkView, Item item, RecyclerView.ViewHolder holder) {
+        if (mSelectionSpec.countable) {
+            int checkedNum = mSelectedCollection.checkedNumOf(item);
+            if (checkedNum == CheckView.UNCHECKED) {
+                if (assertAddSelection(holder.itemView.getContext(), item)) {
+                    mSelectedCollection.add(item);
+                    notifyCheckStateChanged();
+                }
+            } else {
+                mSelectedCollection.remove(item);
+                notifyCheckStateChanged();
+            }
+        } else {
+            if (mSelectedCollection.isSelected(item)) {
+                mSelectedCollection.remove(item);
+                notifyCheckStateChanged();
+            } else {
+                if (assertAddSelection(holder.itemView.getContext(), item)) {
+                    mSelectedCollection.add(item);
+                    notifyCheckStateChanged();
+                }
+            }
+        }
+    }
 
+    private boolean assertAddSelection(Context context, Item item) {
+        IncapableCause cause = mSelectedCollection.isAcceptable(item);
+        IncapableCause.handleCause(context, cause);
+        return cause == null;
+    }
+
+    private void notifyCheckStateChanged() {
+        notifyDataSetChanged();
+        if (mCheckStateListener != null) {
+            mCheckStateListener.onUpdate();
+        }
+    }
+
+    public void refreshSelection() {
+        GridLayoutManager layoutManager = (GridLayoutManager) mRecyclerView.getLayoutManager();
+        int first = layoutManager.findFirstVisibleItemPosition();
+        int last = layoutManager.findLastVisibleItemPosition();
+        if (first == -1 || last == -1) {
+            return;
+        }
+        Cursor cursor = getCursor();
+        for (int i = first; i <= last; i++) {
+            RecyclerView.ViewHolder holder = mRecyclerView.findViewHolderForAdapterPosition(first);
+            if (holder instanceof AlbumPictureHolder) {
+                if (cursor.moveToPosition(i)) {
+                    setCheckStatus(Item.valueOf(cursor), ((AlbumPictureHolder) holder).mediaGrid);
+                }
+            }
+        }
     }
 
     public void registerCheckStateListener(CheckStateListener listener) {

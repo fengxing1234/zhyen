@@ -31,6 +31,8 @@
         <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
         <item name="item_placeholder">@color/dracula_item_placeholder</item>
         <item name="capture_textColor">@color/dracula_capture</item>
+        <item name="item_checkCircle_borderColor">@color/dracula_item_checkCircle_borderColor</item>
+        <item name="item_checkCircle_backgroundColor">@color/dracula_item_checkCircle_backgroundColor</item>
     </style>
 
     <style name="Popup.Dracula" parent="Widget.AppCompat.ListPopupWindow">

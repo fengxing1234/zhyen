@@ -25,13 +25,20 @@ import androidx.fragment.app.Fragment;
 
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.entity.Album;
+import com.zhyen.android.picture_selected.entity.Item;
 import com.zhyen.android.picture_selected.model.AlbumCollection;
 import com.zhyen.android.picture_selected.model.SelectedItemCollection;
 import com.zhyen.android.picture_selected.ui.MediaSelectionFragment;
+import com.zhyen.android.picture_selected.ui.adapter.AlbumPictureAdapter;
 import com.zhyen.android.picture_selected.ui.adapter.AlbumsAdapter;
 import com.zhyen.android.picture_selected.ui.widget.AlbumsSpinner;
 
-public class PictureSelectionActivity extends AppCompatActivity implements View.OnClickListener, AlbumCollection.AlbumCallbacks {
+public class PictureSelectionActivity extends AppCompatActivity
+        implements View.OnClickListener,
+        MediaSelectionFragment.SelectionProvider,
+        AlbumCollection.AlbumCallbacks,
+        AlbumPictureAdapter.CheckStateListener,
+        AlbumPictureAdapter.OnMediaClickListener {
 
     private static final String TAG = PictureSelectionActivity.class.getSimpleName();
 
@@ -205,5 +212,25 @@ public class PictureSelectionActivity extends AppCompatActivity implements View.
         super.onDestroy();
         Log.d(TAG, "onDestroy: ");
         mAlbumCollection.onDestroy();
+    }
+
+    @Override
+    public void onUpdate() {
+        updateBottomToolbar();
+
+        if (mSpec.onSelectedListener != null) {
+            mSpec.onSelectedListener.onSelected(
+                    mSelectedCollection.asListOfUri(), mSelectedCollection.asListOfString());
+        }
+    }
+
+    @Override
+    public void onMediaClick(Album album, Item item, int adapterPosition) {
+
+    }
+
+    @Override
+    public SelectedItemCollection provideSelectedItemCollection() {
+        return mSelectedCollection;
     }
 }

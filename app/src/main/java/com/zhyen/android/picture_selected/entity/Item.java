@@ -63,7 +63,7 @@ public class Item implements Parcelable {
                 cursor.getLong(cursor.getColumnIndex("duration")));
     }
 
-    private boolean isImage() {
+    public boolean isImage() {
         return MimeType.isImage(mimeType);
     }
 
@@ -95,5 +95,40 @@ public class Item implements Parcelable {
         dest.writeLong(id);
         dest.writeLong(duration);
         dest.writeParcelable(uri, flags);
+    }
+
+    /**
+     * checkedNumOf indexOf 需要 否则判断不出对象
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Item)) {
+            return false;
+        }
+
+        Item other = (Item) obj;
+        return id == other.id
+                && (mimeType != null && mimeType.equals(other.mimeType)
+                || (mimeType == null && other.mimeType == null))
+                && (uri != null && uri.equals(other.uri)
+                || (uri == null && other.uri == null))
+                && size == other.size
+                && duration == other.duration;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + Long.valueOf(id).hashCode();
+        if (mimeType != null) {
+            result = 31 * result + mimeType.hashCode();
+        }
+        result = 31 * result + uri.hashCode();
+        result = 31 * result + Long.valueOf(size).hashCode();
+        result = 31 * result + Long.valueOf(duration).hashCode();
+        return result;
     }
 }

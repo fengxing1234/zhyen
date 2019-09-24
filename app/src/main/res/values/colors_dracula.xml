@@ -14,4 +14,6 @@
     <color name="dracula_album_popup_bg">#34474E</color>
     <color name="dracula_item_placeholder">#37474F</color>
     <color name="dracula_capture">#FFFFFF</color>
+    <color name="dracula_item_checkCircle_borderColor">#FFFFFF</color>
+    <color name="dracula_item_checkCircle_backgroundColor">#263237</color>
 </resources>
