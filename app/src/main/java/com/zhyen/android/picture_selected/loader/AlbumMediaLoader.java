@@ -7,6 +7,7 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,8 @@ import com.zhyen.android.picture_selected.util.MediaStoreCompat;
 
 
 public class AlbumMediaLoader extends CursorLoader {
+
+    private static final String TAG = AlbumMediaLoader.class.getSimpleName();
 
     private static final Uri QUERY_URI = MediaStore.Files.getContentUri("external");
 
@@ -171,12 +174,13 @@ public class AlbumMediaLoader extends CursorLoader {
             return cursor;
         }
         MatrixCursor matrixCursor = new MatrixCursor(PROJECTION);
-        matrixCursor.addRow(new Object[]{Item.ITEM_ID_CAPTURE, Item.ITEM_DISPLAY_NAME_CAPTURE, "", 0, 0});
+        matrixCursor.addRow(new Object[]{Item.ITEM_ID_CAPTURE, Item.ITEM_DISPLAY_NAME_CAPTURE, "capture", 0, 0});
         return new MergeCursor(new Cursor[]{matrixCursor, cursor});
     }
 
     @Override
     public void onContentChanged() {
+        Log.d(TAG, "onContentChanged: ");
         super.onContentChanged();
     }
 }

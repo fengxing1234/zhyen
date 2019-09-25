@@ -55,7 +55,7 @@ public class CheckView extends View {
     private Paint mBackgroundPaint;
     private TextPaint mTextPaint;
     private Rect mCheckRect;
-    private boolean mEnabled;
+    private boolean mEnabled = true;
 
     public CheckView(Context context) {
         super(context);

@@ -46,6 +46,7 @@
     <color name="divider">#f8f8f8</color>
     <color name="divider_block">#e9e7e7</color>
 
-
+    <color name="preview_bottom_toolbar_bg">#CC000000</color>
+    <color name="preview_bottom_size">#61FFFFFF</color>
 
 </resources>

@@ -43,7 +43,7 @@
             android:padding="16dp">
 
 
-            <com.zhyen.android.widgets.SelectionCheckRadioView
+            <com.zhyen.android.picture_selected.ui.widget.SelectionCheckRadioView
                 android:id="@+id/selection_check_radio_view"
                 android:layout_width="16dp"
                 android:layout_height="16dp"

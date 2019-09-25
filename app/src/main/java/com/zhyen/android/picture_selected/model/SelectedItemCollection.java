@@ -21,8 +21,8 @@ public class SelectedItemCollection {
 
     private static final String TAG = SelectedItemCollection.class.getSimpleName();
 
-    private static final String STATE_SELECTION = "state_selection";
-    private static final String STATE_COLLECTION_TYPE = "state_collection_type";
+    public static final String STATE_SELECTION = "state_selection";
+    public static final String STATE_COLLECTION_TYPE = "state_collection_type";
 
     /**
      * Collection only with images
@@ -216,5 +216,16 @@ public class SelectedItemCollection {
             paths.add(PathUtils.getPath(mContext, item.getContentUri()));
         }
         return paths;
+    }
+
+    public Bundle getDataWithBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(STATE_SELECTION, new ArrayList<>(mItems));
+        bundle.putInt(STATE_COLLECTION_TYPE, mCollectionType);
+        return bundle;
+    }
+
+    public List<Item> asList() {
+        return new ArrayList<>(mItems);
     }
 }

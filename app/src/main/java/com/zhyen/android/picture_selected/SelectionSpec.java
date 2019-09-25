@@ -1,9 +1,12 @@
 package com.zhyen.android.picture_selected;
 
+import androidx.annotation.StyleRes;
+
 import com.zhyen.android.picture_selected.engine.ImageEngine;
 import com.zhyen.android.picture_selected.engine.impl.GlideEngine;
 import com.zhyen.android.picture_selected.entity.CaptureStrategy;
 import com.zhyen.android.picture_selected.filter.Filter;
+import com.zhyen.android.picture_selected.listener.OnCheckedListener;
 import com.zhyen.android.picture_selected.listener.OnSelectedListener;
 
 import java.util.List;
@@ -48,7 +51,15 @@ public class SelectionSpec {
     public List<Filter> filters;
     public boolean mediaTypeExclusive;
     public OnSelectedListener onSelectedListener;
+    public OnCheckedListener onCheckedListener;
     public CaptureStrategy captureStrategy = new CaptureStrategy(true, "com.zhyen.android.fileprovider", "嗯嗯");
+    public int originalMaxSize = 10;
+    @StyleRes
+    public int themeId;
+    public boolean hasInited = true;
+    public int orientation;
+    public boolean originalable;
+    public boolean autoHideToolbar = true;
 
     private SelectionSpec() {
 
@@ -69,6 +80,10 @@ public class SelectionSpec {
     //自定义显示类型
     public boolean customShowList() {
         return true;
+    }
+
+    public boolean needOrientationRestriction() {
+        return false;
     }
 
 

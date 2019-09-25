@@ -34,5 +34,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.version.RxjavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.version.RxAndroidVersion"
 
-
+    //手势缩放图片
+    implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
 }

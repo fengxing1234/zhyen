@@ -12,7 +12,7 @@ import com.zhyen.android.picture_selected.MimeType;
 public class Item implements Parcelable {
     public static final int ITEM_ID_CAPTURE = -1;
     public static final String ITEM_DISPLAY_NAME_CAPTURE = "Capture";
-    private long size;
+    public long size;
     public String mimeType;
     public long id;
     public long duration;

@@ -6,6 +6,7 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -142,5 +143,7 @@ public class AlbumLoader extends CursorLoader {
     @Override
     public void onContentChanged() {
         // FIXME a dirty way to fix loading multiple times
+        Log.d(TAG, "onContentChanged: ");
+        super.onContentChanged();
     }
 }

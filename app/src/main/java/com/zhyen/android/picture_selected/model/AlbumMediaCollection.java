@@ -38,6 +38,10 @@ public class AlbumMediaCollection implements LoaderManager.LoaderCallbacks<Curso
         mLoaderManager.initLoader(LOADER_ID, bundle, this);
     }
 
+    public void reLoad(){
+        mLoaderManager.getLoader(LOADER_ID).forceLoad();
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {

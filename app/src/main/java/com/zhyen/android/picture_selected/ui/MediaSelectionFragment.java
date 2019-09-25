@@ -41,7 +41,7 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
     private AlbumPictureAdapter mAdapter;
     private SelectionSpec mSelectionSpec;
 
-    public static Fragment newInstance(Album album) {
+    public static MediaSelectionFragment newInstance(Album album) {
         MediaSelectionFragment mediaSelectionFragment = new MediaSelectionFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRA_ALBUM, album);
@@ -104,6 +104,7 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.d(TAG, "onDestroyView: ");
         mCollection.onDestroy();
     }
 
@@ -145,6 +146,10 @@ public class MediaSelectionFragment extends Fragment implements AlbumMediaCollec
             mOnMediaClickListener.onMediaClick((Album) getArguments().getParcelable(EXTRA_ALBUM),
                     item, adapterPosition);
         }
+    }
+
+    public void reLoad() {
+        mCollection.reLoad();
     }
 
     public interface SelectionProvider {

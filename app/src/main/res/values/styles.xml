@@ -33,6 +33,8 @@
         <item name="capture_textColor">@color/dracula_capture</item>
         <item name="item_checkCircle_borderColor">@color/dracula_item_checkCircle_borderColor</item>
         <item name="item_checkCircle_backgroundColor">@color/dracula_item_checkCircle_backgroundColor</item>
+        <item name="preview_bottomToolbar_back_textColor">@color/dracula_preview_bottom_toolbar_back_text</item>
+        <item name="preview_bottomToolbar_apply_textColor">@drawable/select_dracula_preview_bottom_toolbar_apply</item>
     </style>
 
     <style name="Popup.Dracula" parent="Widget.AppCompat.ListPopupWindow">

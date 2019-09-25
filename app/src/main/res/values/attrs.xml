@@ -14,6 +14,8 @@
     <attr name="capture_textColor" format="reference|color" />
     <attr name="item_checkCircle_borderColor" format="color|reference" />
     <attr name="item_checkCircle_backgroundColor" format="reference|color" />
+    <attr name="preview_bottomToolbar_back_textColor" format="reference|color" />
+    <attr name="preview_bottomToolbar_apply_textColor" format="reference|color" />
 
     <declare-styleable name="BlurredView">
         <attr name="src" format="reference" />

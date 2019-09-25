@@ -24,7 +24,10 @@
             </intent-filter>
         </activity>
 
+        <!--图片选择器-->
         <activity android:name=".picture_selected.PictureSelectionActivity" />
+        <activity android:name=".picture_selected.ui.AlbumPreviewActivity" />
+        <activity android:name=".picture_selected.ui.SelectedPreviewActivity"/>
 
         <activity android:name=".test.test_blur.TestBlurActivity" />
         <activity android:name=".test.test_blur.TestSimpleBlurActivity" />

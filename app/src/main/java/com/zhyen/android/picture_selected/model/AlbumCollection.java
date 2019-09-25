@@ -49,6 +49,19 @@ public class AlbumCollection implements LoaderManager.LoaderCallbacks<Cursor> {
         loaderManager.initLoader(LOADER_ID, null, this);
     }
 
+    public void reload() {
+        if (context.get() == null) {
+            return;
+        }
+        if (loaderManager == null) {
+            return;
+        }
+        Loader<Object> loader = loaderManager.getLoader(LOADER_ID);
+        if (loader != null) {
+            loader.forceLoad();
+        }
+    }
+
     @NonNull
     @Override
     public Loader onCreateLoader(int i, @Nullable Bundle bundle) {

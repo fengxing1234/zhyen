@@ -1,4 +1,4 @@
-package com.zhyen.android.widgets;
+package com.zhyen.android.picture_selected.ui.widget;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -35,7 +35,7 @@ public class SelectionCheckRadioView extends AppCompatImageView {
         setChecked(false);
     }
 
-    private void setChecked(boolean enable) {
+    public void setChecked(boolean enable) {
         if (enable) {
             setImageResource(R.drawable.ic_preview_radio_on);
             mDrawable = getDrawable();
@@ -45,5 +45,12 @@ public class SelectionCheckRadioView extends AppCompatImageView {
             mDrawable = getDrawable();
             mDrawable.setColorFilter(mUnSelectUdColor, PorterDuff.Mode.SRC_IN);
         }
+    }
+
+    public void setColor(int color) {
+        if (mDrawable == null) {
+            mDrawable = getDrawable();
+        }
+        mDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
     }
 }

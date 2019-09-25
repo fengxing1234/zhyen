@@ -25,18 +25,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.entity.Album;
 import com.zhyen.android.picture_selected.entity.Item;
 import com.zhyen.android.picture_selected.model.AlbumCollection;
 import com.zhyen.android.picture_selected.model.SelectedItemCollection;
+import com.zhyen.android.picture_selected.ui.AlbumPreviewActivity;
+import com.zhyen.android.picture_selected.ui.BasePreviewActivity;
 import com.zhyen.android.picture_selected.ui.MediaSelectionFragment;
+import com.zhyen.android.picture_selected.ui.SelectedPreviewActivity;
 import com.zhyen.android.picture_selected.ui.adapter.AlbumPictureAdapter;
 import com.zhyen.android.picture_selected.ui.adapter.AlbumsAdapter;
 import com.zhyen.android.picture_selected.ui.widget.AlbumsSpinner;
+import com.zhyen.android.picture_selected.ui.widget.IncapableDialog;
+import com.zhyen.android.picture_selected.ui.widget.SelectionCheckRadioView;
 import com.zhyen.android.picture_selected.util.MediaStoreCompat;
+import com.zhyen.android.picture_selected.util.PhotoMetadataUtils;
 
 import java.util.ArrayList;
 
@@ -55,6 +60,7 @@ public class PictureSelectionActivity extends AppCompatActivity
     public static final String EXTRA_RESULT_ORIGINAL_ENABLE = "extra_result_original_enable";
     private static final String CHECK_STATE = "checkState";
     private static final int REQUEST_CODE_CAPTURE = 24;
+    private static final int REQUEST_CODE_PREVIEW = 23;
 
     private SelectedItemCollection mSelectedCollection = new SelectedItemCollection(this);
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
@@ -65,11 +71,12 @@ public class PictureSelectionActivity extends AppCompatActivity
     private AlbumsAdapter adapter;
     private AlbumsSpinner albumsSpinner;
 
-    private boolean mOriginalEnable = true;
-    private boolean isShowSelectedAlbum = false;
+    private boolean mOriginalEnable;
     private FrameLayout mEmptyView;
     private FrameLayout mContainer;
     private MediaStoreCompat mMediaStoreCompat;
+    private SelectionCheckRadioView mCheckView;
+    private MediaSelectionFragment fragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,6 +116,7 @@ public class PictureSelectionActivity extends AppCompatActivity
 
         llOriginLayout = findViewById(R.id.ll_origin_layout);
         llOriginLayout.setOnClickListener(this);
+        mCheckView = findViewById(R.id.selection_check_radio_view);
 
         tvPreview = findViewById(R.id.tv_preview);
         tvPreview.setOnClickListener(this);
@@ -160,15 +168,75 @@ public class PictureSelectionActivity extends AppCompatActivity
 
         if (mSpec.originEnable) {
             llOriginLayout.setVisibility(View.VISIBLE);
-            // TODO: 2019-09-18  updateOriginalState()
+            updateOriginalState();
         } else {
             llOriginLayout.setVisibility(View.GONE);
         }
     }
 
+    private void updateOriginalState() {
+        mCheckView.setChecked(mOriginalEnable);
+        if (countOverMaxSize() > 0) {
+
+            if (mOriginalEnable) {
+                IncapableDialog incapableDialog = IncapableDialog.newInstance("",
+                        getString(R.string.error_over_original_size, mSpec.originalMaxSize));
+                incapableDialog.show(getSupportFragmentManager(),
+                        IncapableDialog.class.getName());
+
+                mCheckView.setChecked(false);
+                mOriginalEnable = false;
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.tv_preview) {
+            Intent intent = new Intent(this, SelectedPreviewActivity.class);
+            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+            intent.putExtra(BasePreviewActivity.EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
+            startActivityForResult(intent, REQUEST_CODE_PREVIEW);
+        } else if (v.getId() == R.id.tv_apply) {
+            Intent result = new Intent();
+            ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
+            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+            ArrayList<String> selectedPaths = (ArrayList<String>) mSelectedCollection.asListOfString();
+            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+            result.putExtra(EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
+            setResult(RESULT_OK, result);
+            finish();
+        } else if (v.getId() == R.id.ll_origin_layout) {
+            int count = countOverMaxSize();
+            if (count > 0) {
+                IncapableDialog incapableDialog = IncapableDialog.newInstance("",
+                        getString(R.string.error_over_original_count, count, mSpec.originalMaxSize));
+                incapableDialog.show(getSupportFragmentManager(),
+                        IncapableDialog.class.getName());
+                return;
+            }
+            mOriginalEnable = !mOriginalEnable;
+            mCheckView.setChecked(mOriginalEnable);
 
+            if (mSpec.onCheckedListener != null) {
+                mSpec.onCheckedListener.onCheck(mOriginalEnable);
+            }
+        }
+    }
+
+    private int countOverMaxSize() {
+        int count = 0;
+        int selectedCount = mSelectedCollection.count();
+        for (int i = 0; i < selectedCount; i++) {
+            Item item = mSelectedCollection.asList().get(i);
+            if (item.isImage()) {
+                float size = PhotoMetadataUtils.getSizeInMB(item.size);
+                if (size > mSpec.originalMaxSize) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     @Override
@@ -198,7 +266,7 @@ public class PictureSelectionActivity extends AppCompatActivity
         } else {
             mContainer.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
-            Fragment fragment = MediaSelectionFragment.newInstance(album);
+            fragment = MediaSelectionFragment.newInstance(album);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
@@ -247,7 +315,12 @@ public class PictureSelectionActivity extends AppCompatActivity
 
     @Override
     public void onMediaClick(Album album, Item item, int adapterPosition) {
-
+        Intent intent = new Intent(this, AlbumPreviewActivity.class);
+        intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album);
+        intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item);
+        intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+        intent.putExtra(BasePreviewActivity.EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
+        startActivityForResult(intent, REQUEST_CODE_PREVIEW);
     }
 
     @Override
@@ -269,7 +342,7 @@ public class PictureSelectionActivity extends AppCompatActivity
             return;
 
         if (requestCode == REQUEST_CODE_CAPTURE) {
-            Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
+            final Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
             String path = mMediaStoreCompat.getCurrentPhotoPath();
             ArrayList<Uri> selected = new ArrayList<>();
             selected.add(contentUri);
@@ -287,6 +360,8 @@ public class PictureSelectionActivity extends AppCompatActivity
                 @Override
                 public void onScanFinish() {
                     Log.i("SingleMediaScanner", "scan finish!");
+//                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
+//                    sendBroadcast(intent);
                 }
             });
             //finish();
