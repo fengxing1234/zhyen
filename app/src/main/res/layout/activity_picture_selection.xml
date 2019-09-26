@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:elevation="8dp"
+        android:theme="?toolbar"
         tools:targetApi="lollipop">
 
         <TextView
@@ -29,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?colorPrimary"
+        android:background="?bottomToolbar_bg"
         android:elevation="4dp"
         tools:targetApi="lollipop">
 
@@ -70,6 +71,7 @@
             android:foreground="?selectableItemBackground"
             android:padding="@dimen/margin"
             android:text="@string/preview"
+            android:textColor="?attr/bottomToolbar_preview_textColor"
             android:textSize="16sp" />
 
 

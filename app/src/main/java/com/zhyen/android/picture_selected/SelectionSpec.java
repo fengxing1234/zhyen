@@ -1,7 +1,10 @@
 package com.zhyen.android.picture_selected;
 
+import android.content.pm.ActivityInfo;
+
 import androidx.annotation.StyleRes;
 
+import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.engine.ImageEngine;
 import com.zhyen.android.picture_selected.engine.impl.GlideEngine;
 import com.zhyen.android.picture_selected.entity.CaptureStrategy;
@@ -30,72 +33,94 @@ import java.util.Set;
 public class SelectionSpec {
 
     //选中的图片是否显示数字
-    public boolean countable = true;
+    public boolean countable;
     //可选择的最大数值 如：微信9张
-    public int maxSelectable = 9;
+    public int maxSelectable;
     //图像的最大可选计数。
-    public int maxImageSelectable = 5;
+    public int maxImageSelectable;
     //视频的最大可选计数。
-    public int maxVideoSelectable = 5;
+    public int maxVideoSelectable;
 
-    public boolean originEnable = true;
     //显示拍照按钮
-    public boolean capture = true;
+    public boolean capture;
     //grid尺寸 与 spanCount 设置一个即可
     public int gridExpectedSize;
     //一行显示几张图片
-    public int spanCount = 3;
-    public ImageEngine imageEngine = new GlideEngine();
-    public float thumbnailScale = 0.5f;
-    public Set<MimeType> mimeTypeSet = MimeType.ofAll();
+    public int spanCount;
+    public ImageEngine imageEngine;
+    public float thumbnailScale;
+    public Set<MimeType> mimeTypeSet;
     public List<Filter> filters;
     public boolean mediaTypeExclusive;
     public OnSelectedListener onSelectedListener;
     public OnCheckedListener onCheckedListener;
-    public CaptureStrategy captureStrategy = new CaptureStrategy(true, "com.zhyen.android.fileprovider", "嗯嗯");
-    public int originalMaxSize = 10;
+    public CaptureStrategy captureStrategy;
+    public int originalMaxSize;
     @StyleRes
     public int themeId;
-    public boolean hasInited = true;
+    public boolean hasInited;
     public int orientation;
-    public boolean originalable;
-    public boolean autoHideToolbar = true;
+    public boolean originEnable;
+    public boolean autoHideToolbar;
+    public boolean showSingleMediaType;
 
     private SelectionSpec() {
-
-    }
-
-    public boolean onlyShowGif() {
-        return false;
-    }
-
-    public boolean onlyShowImages() {
-        return false;
-    }
-
-    public boolean onlyShowVideos() {
-        return false;
-    }
-
-    //自定义显示类型
-    public boolean customShowList() {
-        return true;
-    }
-
-    public boolean needOrientationRestriction() {
-        return false;
-    }
-
-
-    private static final class InstanceHolder {
-        private static final SelectionSpec INSTANCE = new SelectionSpec();
     }
 
     public static SelectionSpec getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
+    public static SelectionSpec getCleanInstance() {
+        SelectionSpec selectionSpec = getInstance();
+        selectionSpec.reset();
+        return selectionSpec;
+    }
+
+    private void reset() {
+        mimeTypeSet = null;
+        mediaTypeExclusive = true;
+        showSingleMediaType = false;
+        themeId = R.style.Selection_Zhihu;
+        orientation = 0;
+        countable = false;
+        maxSelectable = 1;
+        maxImageSelectable = 0;
+        maxVideoSelectable = 0;
+        filters = null;
+        capture = false;
+        captureStrategy = null;
+        spanCount = 3;
+        gridExpectedSize = 0;
+        thumbnailScale = 0.5f;
+        imageEngine = new GlideEngine();
+        hasInited = true;
+        originEnable = false;
+        autoHideToolbar = false;
+        originalMaxSize = Integer.MAX_VALUE;
+    }
+
     public boolean singleSelectionModeEnabled() {
         return !countable && (maxSelectable == 1 || (maxImageSelectable == 1 && maxVideoSelectable == 1));
+    }
+
+    public boolean needOrientationRestriction() {
+        return orientation != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+    }
+
+    public boolean onlyShowImages() {
+        return showSingleMediaType && MimeType.ofImage().containsAll(mimeTypeSet);
+    }
+
+    public boolean onlyShowVideos() {
+        return showSingleMediaType && MimeType.ofVideo().containsAll(mimeTypeSet);
+    }
+
+    public boolean onlyShowGif() {
+        return showSingleMediaType && MimeType.ofGif().equals(mimeTypeSet);
+    }
+
+    private static final class InstanceHolder {
+        private static final SelectionSpec INSTANCE = new SelectionSpec();
     }
 }

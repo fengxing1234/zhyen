@@ -2,9 +2,12 @@
 <resources>
     <!--图片选择器相关-->
     <color name="dracula_primary">#263237</color>
+    <color name="dracula_primary_dark">#1D282C</color>
+    <color name="dracula_page_bg">#232E32</color>
     <color name="picture_item_checkCircle_backgroundColor">#1E8AE8</color>
     <color name="picture_check_original_radio_disable">#808080</color>
     <color name="dracula_bottom_toolbar_preview">#DEFFFFFF</color>
+    <color name="dracula_bottom_toolbar_bg">#34474E</color>
     <color name="dracula_album_empty_view">#4DFFFFFF</color>
     <color name="dracula_bottom_toolbar_apply_text">#03A9F4</color>
     <color name="dracula_bottom_toolbar_apply_text_disable">#4D03A9F4</color>

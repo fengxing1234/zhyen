@@ -15,8 +15,52 @@
 
     </style>
 
+
+    <!--================================图片选择器蓝色主题=============================-->
+    <style name="Selection.Zhihu" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/zhihu_primary</item>
+        <item name="colorPrimaryDark">@color/zhihu_primary_dark</item>
+        <item name="toolbar">@style/Toolbar.Zhihu</item>
+        <item name="album_dropdown_title_color">@color/zhihu_album_dropdown_title_text</item>
+        <item name="album_dropdown_count_color">@color/zhihu_album_dropdown_count_text</item>
+        <item name="album_element_color">@android:color/white</item>
+        <item name="album_thumbnail_placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder
+        </item>
+        <item name="album_emptyView">@drawable/ic_empty_zhihu</item>
+        <item name="album_emptyView_textColor">@color/zhihu_album_empty_view</item>
+        <item name="item_placeholder">@color/zhihu_item_placeholder</item>
+        <item name="item_checkCircle_backgroundColor">
+            @color/zhihu_item_checkCircle_backgroundColor
+        </item>
+        <item name="item_checkCircle_borderColor">@color/zhihu_item_checkCircle_borderColor</item>
+        <item name="page_bg">@color/zhihu_page_bg</item>
+        <item name="bottomToolbar_bg">@color/zhihu_bottom_toolbar_bg</item>
+        <item name="bottomToolbar_preview_textColor">@color/select_zhihu_bottom_toolbar_preview
+        </item>
+        <item name="bottomToolbar_apply_textColor">@color/select_zhihu_bottom_toolbar_apply</item>
+        <item name="preview_bottomToolbar_back_textColor">
+            @color/zhihu_preview_bottom_toolbar_back_text
+        </item>
+        <item name="preview_bottomToolbar_apply_textColor">
+            @color/select_zhihu_preview_bottom_toolbar_apply
+        </item>
+        <item name="listPopupWindowStyle">@style/Popup.Zhihu</item>
+        <item name="capture_textColor">@color/zhihu_capture</item>
+    </style>
+
+    <style name="Toolbar.Zhihu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
+    <style name="Popup.Zhihu" parent="Widget.AppCompat.Light.ListPopupWindow">
+        <item name="android:popupBackground">@color/zhihu_album_popup_bg</item>
+    </style>
+
+    <!--================================图片选择器黑色主题=============================-->
     <style name="Selection.Dracula" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/dracula_primary</item>
+        <item name="colorPrimaryDark">@color/dracula_primary_dark</item>
+        <item name="toolbar">@style/Toolbar.Dracula</item>
         <item name="bottomToolbar_preview_textColor">@color/dracula_bottom_toolbar_preview</item>
         <item name="bottomToolbar_apply_textColor">@color/dracula_bottom_toolbar_apply_selector
         </item>
@@ -26,15 +70,27 @@
         <item name="album_thumbnail_placeholder">
             @color/dracula_album_dropdown_thumbnail_placeholder
         </item>
+        <item name="bottomToolbar_bg">@color/dracula_bottom_toolbar_bg</item>
+        <item name="page_bg">@color/dracula_page_bg</item>
         <item name="album_dropdown_title_color">@color/album_dropdown_title_color</item>
         <item name="album_dropdown_count_color">@color/album_dropdown_count_color</item>
         <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
         <item name="item_placeholder">@color/dracula_item_placeholder</item>
         <item name="capture_textColor">@color/dracula_capture</item>
         <item name="item_checkCircle_borderColor">@color/dracula_item_checkCircle_borderColor</item>
-        <item name="item_checkCircle_backgroundColor">@color/dracula_item_checkCircle_backgroundColor</item>
-        <item name="preview_bottomToolbar_back_textColor">@color/dracula_preview_bottom_toolbar_back_text</item>
-        <item name="preview_bottomToolbar_apply_textColor">@drawable/select_dracula_preview_bottom_toolbar_apply</item>
+        <item name="item_checkCircle_backgroundColor">
+            @color/dracula_item_checkCircle_backgroundColor
+        </item>
+        <item name="preview_bottomToolbar_back_textColor">
+            @color/dracula_preview_bottom_toolbar_back_text
+        </item>
+        <item name="preview_bottomToolbar_apply_textColor">
+            @drawable/select_dracula_preview_bottom_toolbar_apply
+        </item>
+    </style>
+
+    <style name="Toolbar.Dracula" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
     </style>
 
     <style name="Popup.Dracula" parent="Widget.AppCompat.ListPopupWindow">

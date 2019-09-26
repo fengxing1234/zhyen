@@ -2,7 +2,6 @@ package com.zhyen.android.picture_selected;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -25,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.zhyen.android.R;
 import com.zhyen.android.picture_selected.entity.Album;
@@ -42,6 +42,7 @@ import com.zhyen.android.picture_selected.ui.widget.IncapableDialog;
 import com.zhyen.android.picture_selected.ui.widget.SelectionCheckRadioView;
 import com.zhyen.android.picture_selected.util.MediaStoreCompat;
 import com.zhyen.android.picture_selected.util.PhotoMetadataUtils;
+import com.zhyen.android.test.test_luban.PathUtils;
 
 import java.util.ArrayList;
 
@@ -83,11 +84,16 @@ public class PictureSelectionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: ");
         mSpec = SelectionSpec.getInstance();
-        setTheme(R.style.Selection_Dracula);
+        setTheme(mSpec.themeId);
         setContentView(R.layout.activity_picture_selection);
+        if (!mSpec.hasInited) {
+            setResult(RESULT_CANCELED);
+            finish();
+            return;
+        }
 
-        if (mOriginalEnable) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);//传感器方向
+        if (mSpec.needOrientationRestriction()) {
+            setRequestedOrientation(mSpec.orientation);
         }
 
         if (mSpec.capture) {
@@ -148,6 +154,7 @@ public class PictureSelectionActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         mSelectedCollection.onSaveInstanceState(outState);
         mAlbumCollection.onSaveInstanceState(outState);
+        outState.putBoolean(CHECK_STATE, mOriginalEnable);
     }
 
     private void updateBottomToolbar() {
@@ -300,6 +307,8 @@ public class PictureSelectionActivity extends AppCompatActivity
         super.onDestroy();
         Log.d(TAG, "onDestroy: ");
         mAlbumCollection.onDestroy();
+        mSpec.onCheckedListener = null;
+        mSpec.onSelectedListener = null;
     }
 
     @Override
@@ -341,8 +350,39 @@ public class PictureSelectionActivity extends AppCompatActivity
         if (resultCode != RESULT_OK)
             return;
 
-        if (requestCode == REQUEST_CODE_CAPTURE) {
-            final Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
+        if (requestCode == REQUEST_CODE_PREVIEW) {
+            Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
+            ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
+            mOriginalEnable = data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_ORIGINAL_ENABLE, false);
+            int collectionType = resultBundle.getInt(SelectedItemCollection.STATE_COLLECTION_TYPE,
+                    SelectedItemCollection.COLLECTION_UNDEFINED);
+            if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {
+                Intent result = new Intent();
+                ArrayList<Uri> selectedUris = new ArrayList<>();
+                ArrayList<String> selectedPaths = new ArrayList<>();
+                if (selected != null) {
+                    for (Item item : selected) {
+                        selectedUris.add(item.getContentUri());
+                        selectedPaths.add(PathUtils.getPath(this, item.getContentUri()));
+                    }
+                }
+                result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+                result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+                result.putExtra(EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
+                setResult(RESULT_OK, result);
+                finish();
+            } else {
+                mSelectedCollection.overwrite(selected, collectionType);
+                Fragment mediaSelectionFragment = getSupportFragmentManager().findFragmentByTag(
+                        MediaSelectionFragment.class.getSimpleName());
+                if (mediaSelectionFragment instanceof MediaSelectionFragment) {
+                    ((MediaSelectionFragment) mediaSelectionFragment).refreshMediaGrid();
+                }
+                updateBottomToolbar();
+            }
+        } else if (requestCode == REQUEST_CODE_CAPTURE) {
+            // Just pass the data back to previous calling Activity.
+            Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
             String path = mMediaStoreCompat.getCurrentPhotoPath();
             ArrayList<Uri> selected = new ArrayList<>();
             selected.add(contentUri);
@@ -360,11 +400,9 @@ public class PictureSelectionActivity extends AppCompatActivity
                 @Override
                 public void onScanFinish() {
                     Log.i("SingleMediaScanner", "scan finish!");
-//                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
-//                    sendBroadcast(intent);
                 }
             });
-            //finish();
+            finish();
         }
     }
 

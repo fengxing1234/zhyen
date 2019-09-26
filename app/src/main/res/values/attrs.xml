@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <attr name="toolbar" format="reference|color" />
+    <attr name="page_bg" format="reference|color" />
+    <attr name="bottomToolbar_bg" format="reference|color"/>
     <attr name="bottomToolbar_preview_textColor" format="reference|color" />
     <attr name="bottomToolbar_apply_textColor" format="reference|color" />
     <attr name="album_element_color" format="reference|color" />

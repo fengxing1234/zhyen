@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zhyen.android.picture_selected.PictureSelectionActivity;
+import com.zhyen.android.test.test_activity.TestSamplePictureActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_pic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PictureSelectionActivity.class));
+                startActivity(new Intent(MainActivity.this, TestSamplePictureActivity.class));
             }
         });
     }

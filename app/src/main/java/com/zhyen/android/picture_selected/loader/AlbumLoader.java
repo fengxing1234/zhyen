@@ -108,14 +108,7 @@ public class AlbumLoader extends CursorLoader {
             selection = SELECTION_FOR_SINGLE_MEDIA_TYPE;
             selectionArgs = getSelectionArgsForSingleMediaType(
                     MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO);
-        } else if (SelectionSpec.getInstance().customShowList()) {
-            selection = selections;
-            selectionArgs = selection_args;
         } else {
-            selection = SELECTION;
-            selectionArgs = SELECTION_ARGS;
-        }
-        if (selection == null || selection_args == null) {
             selection = SELECTION;
             selectionArgs = SELECTION_ARGS;
         }

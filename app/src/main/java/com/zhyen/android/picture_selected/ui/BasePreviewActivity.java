@@ -25,7 +25,7 @@ import com.zhyen.android.picture_selected.ui.widget.SelectionCheckRadioView;
 import com.zhyen.android.picture_selected.util.PhotoMetadataUtils;
 import com.zhyen.android.picture_selected.util.Platform;
 
-public abstract class BasePreviewActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener , OnFragmentInteractionListener {
+public abstract class BasePreviewActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener, OnFragmentInteractionListener {
 
     public static final String EXTRA_DEFAULT_BUNDLE = "extra_default_bundle";
     public static final String EXTRA_RESULT_BUNDLE = "extra_result_bundle";
@@ -53,8 +53,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        //setTheme(SelectionSpec.getInstance().themeId);
-        setTheme(R.style.Selection_Dracula);
+        setTheme(SelectionSpec.getInstance().themeId);
         super.onCreate(savedInstanceState);
 //        if (!SelectionSpec.getInstance().hasInited) {
 //            setResult(RESULT_CANCELED);
@@ -263,7 +262,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             mButtonApply.setText(getString(R.string.button_apply, selectedCount));
         }
 
-        if (mSpec.originalable) {
+        if (mSpec.originEnable) {
             mOriginalLayout.setVisibility(View.VISIBLE);
             updateOriginalState();
         } else {
@@ -319,7 +318,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
         if (item.isVideo()) {
             mOriginalLayout.setVisibility(View.GONE);
-        } else if (mSpec.originalable) {
+        } else if (mSpec.originEnable) {
             mOriginalLayout.setVisibility(View.VISIBLE);
         }
     }

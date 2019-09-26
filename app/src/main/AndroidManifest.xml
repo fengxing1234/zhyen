@@ -34,11 +34,12 @@
         <activity android:name=".test.test_blur.TestDynamicBlurActivity" />
         <activity android:name=".test.test_blur.BlurWeatherActivity" />
         <activity android:name=".test.test_luban.LuBanMainActivity" />
-        <activity android:name=".test.TestCompressorActivity" />
+        <activity android:name=".test.test_activity.TestCompressorActivity" />
         <activity android:name=".test.test_widget.TestCircularImageView" />
         <activity android:name=".test.test_utils.TestUtilsActivity" />
         <activity android:name=".test.test_provider.TestProviderActivity" />
-        <activity android:name=".test.TestListPopupWindowActivity" />
+        <activity android:name=".test.test_activity.TestListPopupWindowActivity" />
+        <activity android:name=".test.test_activity.TestSamplePictureActivity"/>
 
         <provider
             android:name=".test.test_provider.TestPictureProvider"

@@ -1,4 +1,4 @@
-package com.zhyen.android.test;
+package com.zhyen.android.test.test_activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
