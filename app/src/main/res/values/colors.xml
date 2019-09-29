@@ -11,6 +11,9 @@
     <color name="textColorSecondary">#999999</color>
     <color name="textColorTertiary">#bcbecf</color>
 
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
     <!--主色-->
     <color name="main">#ff4b38</color>
     <color name="main_2">#ff4b3b</color>

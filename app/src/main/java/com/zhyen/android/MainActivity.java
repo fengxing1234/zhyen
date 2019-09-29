@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.test.test_activity.TestSamplePictureActivity;
+import com.zhyen.android.test.test_activity.TestWidgetActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TestSamplePictureActivity.class));
+            }
+        });
+        findViewById(R.id.btn_widget).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TestWidgetActivity.class));
             }
         });
     }

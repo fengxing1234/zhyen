@@ -28,6 +28,7 @@ dependencies {
     implementation rootProject.ext.androidX.appcompat
     implementation rootProject.ext.androidX.constraintlayout
     implementation rootProject.ext.androidX.recyclerview
+    implementation rootProject.ext.androidX.coordinatorlayout
 
     //glide
     implementation "com.github.bumptech.glide:glide:$rootProject.ext.version.glideVersion"
@@ -40,4 +41,6 @@ dependencies {
 
     //手势缩放图片
     implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
+
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
 }

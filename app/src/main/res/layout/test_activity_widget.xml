@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_xfermode_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="练习_图片混合模式" />
+
+        <Button
+            android:id="@+id/btn_circular_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="练习_圆形头像" />
+
+        <Button
+            android:id="@+id/btn_test_custom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="练习_自定义控件_基础" />
+    </LinearLayout>
+
+</FrameLayout>
