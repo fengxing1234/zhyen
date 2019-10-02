@@ -1,4 +1,4 @@
-package com.zhyen.android.test.test_widget;
+package com.zhyen.test.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;

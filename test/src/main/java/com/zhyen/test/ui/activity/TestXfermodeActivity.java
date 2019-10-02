@@ -1,4 +1,4 @@
-package com.zhyen.android.test.test_activity;
+package com.zhyen.test.ui.activity;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.zhyen.android.R;
-import com.zhyen.android.picture_selected.ui.widget.MediaGridInset;
-import com.zhyen.android.test.test_widget.TestXformodeView;
+import com.zhyen.base.widget.MediaGridInset;
+import com.zhyen.test.R;
+import com.zhyen.test.widget.TestXformodeView;
 
 import java.util.Arrays;
 import java.util.List;

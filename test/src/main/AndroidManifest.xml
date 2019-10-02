@@ -4,5 +4,6 @@
     <application>
         <activity android:name=".ui.activity.TestCustomViewDrawActivity" />
         <activity android:name=".ui.activity.TestCustomViewPaintActivity" />
+        <activity android:name=".ui.activity.TestXfermodeActivity"/>
     </application>
 </manifest>

@@ -14,7 +14,7 @@
         android:text="模式"
         android:textSize="14sp" />
 
-    <com.zhyen.android.test.test_widget.TestXformodeView
+    <com.zhyen.test.widget.TestXformodeView
         android:id="@+id/test_xformode"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

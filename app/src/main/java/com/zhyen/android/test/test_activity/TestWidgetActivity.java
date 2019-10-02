@@ -12,6 +12,7 @@ import com.zhyen.android.R;
 import com.zhyen.android.test.test_widget.TestCircularImageView;
 import com.zhyen.test.ui.activity.TestCustomViewDrawActivity;
 import com.zhyen.test.ui.activity.TestCustomViewPaintActivity;
+import com.zhyen.test.ui.activity.TestXfermodeActivity;
 
 public class TestWidgetActivity extends AppCompatActivity implements View.OnClickListener {
 
