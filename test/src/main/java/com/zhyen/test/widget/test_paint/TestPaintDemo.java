@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
@@ -22,8 +23,6 @@ import androidx.annotation.Nullable;
  * <p>
  * <p>
  * Static final Shader.TillMode REPETA：在水平方向和垂直方向重复摆放,两个相邻图像间有缝隙缝隙.
- *
- *
  */
 public class TestPaintDemo extends View {
 
@@ -61,6 +60,8 @@ public class TestPaintDemo extends View {
     private void init() {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         paint = new Paint();
+        paint.setStrokeWidth(40);
+        paint.setStyle(Paint.Style.STROKE);
 //        Shader shader = new LinearGradient(100, 100, 500, 500, Color.parseColor("#E91E63"),
 //                Color.parseColor("#2196F3"), Shader.TileMode.CLAMP);
     }
@@ -73,8 +74,19 @@ public class TestPaintDemo extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //test(canvas);
-        //test2(canvas);
+
+        canvas.translate(100, 100);
+
+
+        Path path = new Path();
+//        path.rLineTo(200, 0);
+//        path.rLineTo(-160, 120);
+        path.moveTo(200, 200);
+        path.lineTo(300, 500);
+        canvas.drawPath(path, paint);
+
+        canvas.translate(200, 200);
+        canvas.drawPath(path, paint);
 
     }
 
