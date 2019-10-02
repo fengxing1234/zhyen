@@ -22,10 +22,16 @@
             android:text="练习_圆形头像" />
 
         <Button
-            android:id="@+id/btn_test_custom_view"
+            android:id="@+id/btn_test_custom_draw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="练习_自定义控件_基础" />
+            android:text="练习_自定义控件_画图" />
+
+        <Button
+            android:id="@+id/btn_test_custom_paint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="练习_自定义控件_画笔" />
     </LinearLayout>
 
 </FrameLayout>

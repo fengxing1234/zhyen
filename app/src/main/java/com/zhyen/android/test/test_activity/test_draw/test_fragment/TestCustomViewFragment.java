@@ -1,4 +1,4 @@
-package com.zhyen.android.test.test_activity.test_fragment;
+package com.zhyen.android.test.test_activity.test_draw.test_fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

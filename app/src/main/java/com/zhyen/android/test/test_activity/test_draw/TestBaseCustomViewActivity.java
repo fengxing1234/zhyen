@@ -1,4 +1,4 @@
-package com.zhyen.android.test.test_activity;
+package com.zhyen.android.test.test_activity.test_draw;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,35 +15,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zhyen.android.R;
-import com.zhyen.android.test.test_activity.test_fragment.TestCustomViewFragment;
+import com.zhyen.android.test.test_activity.test_draw.test_fragment.TestCustomViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCustomViewActivity extends AppCompatActivity {
+public abstract class TestBaseCustomViewActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     List<PageModel> pageModels = new ArrayList<>();
     private Toolbar testToolBar;
-
-    {
-        pageModels.add(new PageModel(R.layout.test_view_practice_color, "画颜色", R.layout.test_view_practice_color));
-        pageModels.add(new PageModel(R.layout.test_view_practice_circle, "画圆", R.layout.test_view_practice_circle));
-//        pageModels.add(new PageModel(R.layout.sample_rect, "", R.layout.practice_rect));
-        pageModels.add(new PageModel(R.layout.test_view_practice_point, "画点", R.layout.test_view_practice_point));
-//        pageModels.add(new PageModel(R.layout.sample_oval, "", R.layout.practice_oval));
-//        pageModels.add(new PageModel(R.layout.sample_line, "", R.layout.practice_line));
-//        pageModels.add(new PageModel(R.layout.sample_round_rect, "", R.layout.practice_round_rect));
-        pageModels.add(new PageModel(R.layout.test_view_practice_arc, "画圆弧", R.layout.test_view_practice_arc));
-//        pageModels.add(new PageModel(R.layout.sample_path, "", R.layout.practice_path));
-        pageModels.add(new PageModel(R.layout.test_view_practice_histogram, "直方图", R.layout.test_view_practice_histogram));
-        pageModels.add(new PageModel(R.layout.test_view_practice_histogram_2, "直方图2", R.layout.test_view_practice_histogram));
-        pageModels.add(new PageModel(R.layout.test_view_practice_histogram_3, "直方图3", R.layout.test_view_practice_histogram));
-        pageModels.add(new PageModel(R.layout.test_view_practice_pie_chart, "饼状图", R.layout.test_view_practice_pie_chart));
-        pageModels.add(new PageModel(R.layout.test_view_practice_pie_chart_2, "饼状图2", R.layout.test_view_practice_pie_chart));
-    }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +37,7 @@ public class TestCustomViewActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Draw练习");
+            actionBar.setTitle(getTitleName());
         }
 
         viewPager = findViewById(R.id.test_view_pager);
@@ -82,6 +64,8 @@ public class TestCustomViewActivity extends AppCompatActivity {
         });
     }
 
+    protected abstract String getTitleName();
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -90,7 +74,7 @@ public class TestCustomViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class PageModel {
+    public class PageModel {
         @LayoutRes
         int sampleLayoutRes;
 

@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.R;
+import com.zhyen.android.test.test_activity.test_draw.TestCustomViewDrawActivity;
+import com.zhyen.android.test.test_activity.test_draw.TestCustomViewPaintActivity;
 import com.zhyen.android.test.test_widget.TestCircularImageView;
 
 public class TestWidgetActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,7 +24,8 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
         btnXfermode = findViewById(R.id.btn_xfermode_test);
         btnXfermode.setOnClickListener(this);
         findViewById(R.id.btn_circular_image).setOnClickListener(this);
-        findViewById(R.id.btn_test_custom_view).setOnClickListener(this);
+        findViewById(R.id.btn_test_custom_draw).setOnClickListener(this);
+        findViewById(R.id.btn_test_custom_paint).setOnClickListener(this);
     }
 
     @Override
@@ -36,8 +39,13 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
         }
 
-        if (v.getId() == R.id.btn_test_custom_view) {
-            Intent intent = new Intent(this, TestCustomViewActivity.class);
+        if (v.getId() == R.id.btn_test_custom_draw) {
+            Intent intent = new Intent(this, TestCustomViewDrawActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.btn_test_custom_paint) {
+            Intent intent = new Intent(this, TestCustomViewPaintActivity.class);
             startActivity(intent);
         }
     }

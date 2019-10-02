@@ -63,6 +63,7 @@ public class TestDrawPieChart extends View {
         paintLine.setStrokeWidth(10);
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setColor(Color.WHITE);
+        paintLine.setStrokeJoin(Paint.Join.MITER);
 
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
