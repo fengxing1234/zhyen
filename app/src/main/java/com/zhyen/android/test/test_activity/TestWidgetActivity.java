@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.R;
-import com.zhyen.android.test.test_activity.test_draw.TestCustomViewDrawActivity;
-import com.zhyen.android.test.test_activity.test_draw.TestCustomViewPaintActivity;
 import com.zhyen.android.test.test_widget.TestCircularImageView;
+import com.zhyen.test.ui.activity.TestCustomViewDrawActivity;
+import com.zhyen.test.ui.activity.TestCustomViewPaintActivity;
 
 public class TestWidgetActivity extends AppCompatActivity implements View.OnClickListener {
 

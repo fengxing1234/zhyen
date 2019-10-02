@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#a7a6a6</color>
+    <color name="colorAccent">#3cd3f6</color>
+
+    <color name="background">#f3f3f3</color>
+    <color name="lighter_divider">#333333</color>
+
+    <color name="textColorPrimary">#666666</color>
+    <color name="textColorSecondary">#999999</color>
+    <color name="textColorTertiary">#bcbecf</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <!--主色-->
+    <color name="main">#ff4b38</color>
+    <color name="main_2">#ff4b3b</color>
+
+    <!--辅助色-->
+    <color name="sub_blue">#3dadef</color>
+    <color name="sub_yellow">#ffc105</color>
+    <color name="sub_green">#00ce6b</color>
+    <!--顶部导航栏-->
+    <color name="top_title_bar_text">#000000</color>
+    <color name="top_title_bar_bg">#ffffff</color>
+
+    <!--顶部二级导航栏-->
+    <color name="sub_title_bar_text_selected">#222222</color>
+    <color name="sub_title_bar_text_unselected">#999999</color>
+
+    <!--列表相关-->
+    <color name="list_title">#222222</color>
+    <color name="list_content_selected">#444444</color>
+    <color name="list_content_unselected">#999999</color>
+
+    <!--卡片相关-->
+    <color name="card_title">#000000</color>
+    <color name="card_title_value">#222222</color>
+    <color name="card_row_key">#666666</color>
+    <color name="card_row_value">#444444</color>
+
+    <!--底部导航-->
+    <color name="bottom_navigation_click">@color/main</color>
+    <color name="bottom_navigation_unclick">#222222</color>
+
+    <!--分割线-->
+    <color name="divider">#f8f8f8</color>
+    <color name="divider_block">#e9e7e7</color>
+
+    <color name="preview_bottom_toolbar_bg">#CC000000</color>
+    <color name="preview_bottom_size">#61FFFFFF</color>
+
+</resources>
