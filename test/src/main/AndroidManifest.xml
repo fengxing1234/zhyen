@@ -6,5 +6,6 @@
         <activity android:name=".ui.activity.TestCustomViewPaintActivity" />
         <activity android:name=".ui.activity.TestXfermodeActivity" />
         <activity android:name=".ui.activity.TestViewPaintPracticeActivity" />
+        <activity android:name=".ui.activity.TestCustomViewTextActivity" />
     </application>
 </manifest>
