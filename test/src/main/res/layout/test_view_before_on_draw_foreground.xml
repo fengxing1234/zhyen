@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhyen.test.widget.draw_order.TestBeforeOnDrawForegroundView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:foreground="#88000000"
+    android:src="@drawable/batman"
+    android:layout_height="match_parent">
+
+</com.zhyen.test.widget.draw_order.TestBeforeOnDrawForegroundView>

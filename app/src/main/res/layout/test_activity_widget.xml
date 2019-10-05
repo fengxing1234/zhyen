@@ -51,6 +51,12 @@
             android:layout_height="wrap_content"
             android:text="作业_自定义控件_辅助" />
 
+        <Button
+            android:id="@+id/btn_test_draw_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绘制顺序" />
+
     </LinearLayout>
 
 </FrameLayout>

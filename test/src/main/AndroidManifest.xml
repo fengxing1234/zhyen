@@ -2,11 +2,12 @@
     package="com.zhyen.test">
 
     <application>
-        <activity android:name=".ui.activity.TestCustomViewDrawActivity" />
-        <activity android:name=".ui.activity.TestCustomViewPaintActivity" />
+        <activity android:name=".ui.activity.custom_view.TestCustomViewDrawActivity" />
+        <activity android:name=".ui.activity.custom_view.TestCustomViewPaintActivity" />
         <activity android:name=".ui.activity.TestXfermodeActivity" />
-        <activity android:name=".ui.activity.TestViewPaintPracticeActivity" />
-        <activity android:name=".ui.activity.TestCustomViewTextActivity" />
-        <activity android:name=".ui.activity.TestCustomViewAssistActivity" />
+        <activity android:name=".ui.activity.custom_view.TestViewPaintPracticeActivity" />
+        <activity android:name=".ui.activity.custom_view.TestCustomViewTextActivity" />
+        <activity android:name=".ui.activity.custom_view.TestCustomViewAssistActivity" />
+        <activity android:name=".ui.activity.custom_view.TestViewDrawOrderActivity" />
     </application>
 </manifest>

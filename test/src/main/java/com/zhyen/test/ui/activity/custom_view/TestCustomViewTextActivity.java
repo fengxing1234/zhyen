@@ -1,4 +1,4 @@
-package com.zhyen.test.ui.activity;
+package com.zhyen.test.ui.activity.custom_view;
 
 import com.zhyen.test.R;
 
