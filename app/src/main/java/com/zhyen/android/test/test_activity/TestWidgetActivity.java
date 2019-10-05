@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.R;
 import com.zhyen.android.test.test_widget.TestCircularImageView;
+import com.zhyen.test.ui.activity.TestCustomViewAssistActivity;
 import com.zhyen.test.ui.activity.TestCustomViewDrawActivity;
 import com.zhyen.test.ui.activity.TestCustomViewPaintActivity;
 import com.zhyen.test.ui.activity.TestCustomViewTextActivity;
@@ -31,6 +32,7 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btn_test_custom_paint).setOnClickListener(this);
         findViewById(R.id.btn_test_practice_paint).setOnClickListener(this);
         findViewById(R.id.btn_test_practice_draw_text).setOnClickListener(this);
+        findViewById(R.id.btn_test_practice_draw_assist).setOnClickListener(this);
     }
 
     @Override
@@ -63,5 +65,11 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(this, TestCustomViewTextActivity.class);
             startActivity(intent);
         }
+
+        if (v.getId() == R.id.btn_test_practice_draw_assist) {
+            Intent intent = new Intent(this, TestCustomViewAssistActivity.class);
+            startActivity(intent);
+        }
+
     }
 }

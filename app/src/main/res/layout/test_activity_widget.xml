@@ -44,6 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="作业_自定义控件_文字" />
+
+        <Button
+            android:id="@+id/btn_test_practice_draw_assist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="作业_自定义控件_辅助" />
+
     </LinearLayout>
 
 </FrameLayout>
