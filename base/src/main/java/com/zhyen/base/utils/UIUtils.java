@@ -1,6 +1,8 @@
 package com.zhyen.base.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 public class UIUtils {
@@ -17,5 +19,10 @@ public class UIUtils {
             count = 1;
         }
         return count;
+    }
+
+    public static float dpToPixel(int dp) {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        return dp * metrics.density;
     }
 }

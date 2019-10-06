@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <com.zhyen.test.widget.test_animator.test_object_animator.TestObjectAnimatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2B2B2B">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/test_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/white"
+            android:entries="@array/interpolators"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+        <com.zhyen.test.widget.test_animator.test_object_animator.TestObjectAnimatorView
+            android:id="@+id/test_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true" />
+
+        <Button
+            android:id="@+id/test_btn_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:text="播放动画" />
+    </com.zhyen.test.widget.test_animator.test_object_animator.TestObjectAnimatorLayout>
+
+</androidx.core.widget.NestedScrollView>

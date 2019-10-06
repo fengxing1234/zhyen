@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.R;
 import com.zhyen.android.test.test_widget.TestCircularImageView;
+import com.zhyen.test.ui.activity.TestXfermodeActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewAssistActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewDrawActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewPaintActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewTextActivity;
+import com.zhyen.test.ui.activity.custom_view.TestViewAnimationActivity;
 import com.zhyen.test.ui.activity.custom_view.TestViewDrawOrderActivity;
 import com.zhyen.test.ui.activity.custom_view.TestViewPaintPracticeActivity;
-import com.zhyen.test.ui.activity.TestXfermodeActivity;
 
 public class TestWidgetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +36,7 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btn_test_practice_draw_text).setOnClickListener(this);
         findViewById(R.id.btn_test_practice_draw_assist).setOnClickListener(this);
         findViewById(R.id.btn_test_draw_order).setOnClickListener(this);
+        findViewById(R.id.btn_test_animator).setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +77,11 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
 
         if (v.getId() == R.id.btn_test_draw_order) {
             Intent intent = new Intent(this, TestViewDrawOrderActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.btn_test_animator) {
+            Intent intent = new Intent(this, TestViewAnimationActivity.class);
             startActivity(intent);
         }
 

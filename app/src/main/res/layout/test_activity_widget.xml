@@ -57,6 +57,12 @@
             android:layout_height="wrap_content"
             android:text="绘制顺序" />
 
+        <Button
+            android:id="@+id/btn_test_animator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动画" />
+
     </LinearLayout>
 
 </FrameLayout>
