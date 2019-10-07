@@ -11,6 +11,7 @@ public class TestCustomViewDrawActivity extends TestBaseCustomViewActivity {
 
 
     {
+        pageModels.add(new PageModel(R.layout.test_draw_base_webview, "绘制基础", R.layout.test_view_practice_color));
         pageModels.add(new PageModel(R.layout.test_view_practice_color, "画颜色", R.layout.test_view_practice_color));
         pageModels.add(new PageModel(R.layout.test_view_practice_circle, "画圆", R.layout.test_view_practice_circle));
 //        pageModels.add(new PageModel(R.layout.sample_rect, "", R.layout.practice_rect));

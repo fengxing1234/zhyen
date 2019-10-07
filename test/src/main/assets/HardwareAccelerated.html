@@ -1,0 +1,516 @@
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>HenCoder Android 自定义 View 1-8 硬件加速</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="shortcut icon" href="/assets/favicon.ico">
+
+	<link href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic%7CMontserrat:400,700" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=c5687a52e8" />
+
+	<script type="text/javascript">
+		var disqus_shortname = 'my_disqus_shortname', // replace my_disqus_shortname with your shortname
+			instagram_user_id = '2372162651', // add your Instagram user ID
+			instagram_access_token = '2372162651.d4daff6.d6c91752b4914a8da6e01a85747ae89e'; // add your Instagram access token
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="/assets/js/html5.js?v=c5687a52e8"></script>
+	<![endif]-->
+
+	<link rel="canonical" href="http://hencoder.com/ui-1-8/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://hencoder.com/ui-1-8/amp/" />
+
+    <meta property="og:site_name" content="HenCoder" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="HenCoder Android 自定义 View 1-8 硬件加速" />
+    <meta property="og:description" content="硬件加速这个词每当被提及，很多人都会感兴趣。这个词给大部分人的概念大致有两个：快速、不稳定。对很多人来说，硬件加速似乎是一个只可远观而不可亵玩的高端科技：是，我听说它很牛逼，但我不敢「乱」用，因为我怕 hold 不住。 今天我试着就把硬件加速的外衣脱掉（并没有），聊一聊它的原理和应用： 硬件加速的本质和原理；   硬件加速在 Android 中的应用；   硬件加速在 Android 中的限制。   本篇是 「HenCoder Android 开发进阶」自定义 View 部分的最后一篇：硬件加速。      如果你没听说过 HenCoder，也可以看看这个：    HenCoder：给高级 Android 工程师的进阶手册 概念 在正式开始之前需要说明一下，作为绘制部分的最后一期，本期内容只是为了内容的完整性做一个补充，因为之前好几期的内容里都有涉及硬件加速的技术点，而一些读者因为不了解硬件加速而产生了一些疑问。所以仅仅从难度上来讲，这期的内容并不难，并且本期的大部分内容你都可以从这两个页面中找到： Hardware" />
+    <meta property="og:url" content="http://hencoder.com/ui-1-8/" />
+    <meta property="og:image" content="http://hencoder.com/content/images/2017/09/1-7-cover.png" />
+    <meta property="article:published_time" content="2017-09-18T03:03:00.000Z" />
+    <meta property="article:modified_time" content="2019-04-26T01:02:38.000Z" />
+    <meta property="article:tag" content="绘制" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HenCoder Android 自定义 View 1-8 硬件加速" />
+    <meta name="twitter:description" content="硬件加速这个词每当被提及，很多人都会感兴趣。这个词给大部分人的概念大致有两个：快速、不稳定。对很多人来说，硬件加速似乎是一个只可远观而不可亵玩的高端科技：是，我听说它很牛逼，但我不敢「乱」用，因为我怕 hold 不住。 今天我试着就把硬件加速的外衣脱掉（并没有），聊一聊它的原理和应用： 硬件加速的本质和原理；   硬件加速在 Android 中的应用；   硬件加速在 Android 中的限制。   本篇是 「HenCoder Android 开发进阶」自定义 View 部分的最后一篇：硬件加速。      如果你没听说过 HenCoder，也可以看看这个：    HenCoder：给高级 Android 工程师的进阶手册 概念 在正式开始之前需要说明一下，作为绘制部分的最后一期，本期内容只是为了内容的完整性做一个补充，因为之前好几期的内容里都有涉及硬件加速的技术点，而一些读者因为不了解硬件加速而产生了一些疑问。所以仅仅从难度上来讲，这期的内容并不难，并且本期的大部分内容你都可以从这两个页面中找到： Hardware" />
+    <meta name="twitter:url" content="http://hencoder.com/ui-1-8/" />
+    <meta name="twitter:image" content="http://hencoder.com/content/images/2017/09/1-7-cover.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Kai Zhu" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="绘制" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "HenCoder",
+        "logo": "http://hencoder.com/content/images/2017/06/HenCoder-icon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Kai Zhu",
+        "url": "http://hencoder.com/author/kai/",
+        "sameAs": []
+    },
+    "headline": "HenCoder Android 自定义 View 1-8 硬件加速",
+    "url": "http://hencoder.com/ui-1-8/",
+    "datePublished": "2017-09-18T03:03:00.000Z",
+    "dateModified": "2019-04-26T01:02:38.000Z",
+    "image": "http://hencoder.com/content/images/2017/09/1-7-cover.png",
+    "keywords": "绘制",
+    "description": "硬件加速这个词每当被提及，很多人都会感兴趣。这个词给大部分人的概念大致有两个：快速、不稳定。对很多人来说，硬件加速似乎是一个只可远观而不可亵玩的高端科技：是，我听说它很牛逼，但我不敢「乱」用，因为我怕 hold 不住。 今天我试着就把硬件加速的外衣脱掉（并没有），聊一聊它的原理和应用： 硬件加速的本质和原理；   硬件加速在 Android 中的应用；   硬件加速在 Android 中的限制。   本篇是 「HenCoder Android 开发进阶」自定义 View 部分的最后一篇：硬件加速。      如果你没听说过 HenCoder，也可以看看这个：    HenCoder：给高级 Android 工程师的进阶手册 概念 在正式开始之前需要说明一下，作为绘制部分的最后一期，本期内容只是为了内容的完整性做一个补充，因为之前好几期的内容里都有涉及硬件加速的技术点，而一些读者因为不了解硬件加速而产生了一些疑问。所以仅仅从难度上来讲，这期的内容并不难，并且本期的大部分内容你都可以从这两个页面中找到： Hardware",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://hencoder.com"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="HenCoder" href="http://hencoder.com/rss/" />
+    <style>
+    html {
+    font-family: 'Roboto','Helvetica','Arial',sans-serif!important;
+    }
+    blockquote {
+        box-sizing: border-box;
+        margin: 1.75em 0 1.75em 0em;
+        padding: 0 15px;
+        color: #777;
+        border-left: 4px solid #ddd;
+        font-size: 18px;
+        font-weight: normal;
+        border-bottom: none;
+        border-top: none;
+    }
+
+    blockquote p {
+        margin: 1.8em 0;
+    }
+
+    blockquote small {
+        display: inline-block;
+        margin: 0.8em 0 0.8em 1.5em;
+        font-size: 0.9em;
+        color: #CCC;
+    }
+
+    blockquote small:before { content: "\2014 \00A0"; }
+
+    blockquote cite {
+        font-weight: 700;
+    }
+
+    blockquote cite a { font-weight: normal; }
+
+
+
+    .aspect-ratio {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+
+    .aspect-ratio iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
+</style>
+<meta name="google-site-verification" content="KxWDC5V6kgEF9ARuSbQqvC9tU5AQukmfAIA1OOSArQM" />
+<meta name="baidu-site-verification" content="k2ABzhv0Eb" />
+</head>
+<body class="post-template tag-hui-zhi">
+	<div id="page" class="site">
+		<header class="site-header">
+	<div class="inner-wide">
+		<h1 class="site-title"><a href="http://hencoder.com"><img src="/content/images/2017/06/HenCoder-icon.png" alt="HenCoder" /></a></h1>
+		<nav class="site-navigation" aria-label="Main Menu">
+	<h2 class="screen-reader-text">浏览网站</h2>
+	<ul class="menu">
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/">首页</a></li>
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/tag/about/">面世宣言</a></li>
+		<li class="menu-item hencoder-plus" role="presentation"><a href="https://plus.hencoder.com/">HenCoder Plus</a></li>
+		<li class="menu-item " role="presentation"><a href="http://kaixue.io/">码上开学</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/hui-zhi/">自定义 View - 绘制</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/bu-ju/">自定义 View - 布局</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/chu-mo-fan-kui/">自定义 View - 触摸反馈</a></li>
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/tag/shi-jian/">实践</a></li>
+		<li class="menu-item https" role="presentation"><a href="http://hencoder.com/tag/https/">HTTPS</a></li>
+		<li class="menu-item git-" role="presentation"><a href="https://juejin.im/book/5a124b29f265da431d3c472e">Git 教程</a></li>
+	</ul><!-- .menu -->
+</nav><!-- .site-navigation -->
+
+		<a class="sidebar-toggle"><span class="screen-reader-text">Open Sidebar</span><span class="icon" aria-hidden="true"></span></a>
+	</div><!-- .inner-wide -->
+</header><!-- .site-header -->
+
+<main class="site-main">
+	<div class="site-content">
+
+		<article class="post tag-hui-zhi">
+			<header class="cover post-header">
+				<div class="cover-bg" style="background-image: url(/content/images/2017/09/1-7-cover.png)"></div>
+				<div class="cover-content">
+					<div class="inner">
+						<div class="tag-links">
+							<a href="/tag/hui-zhi/">绘制</a>
+						</div><!-- .tag-links -->
+						<h1 class="post-title">HenCoder Android 自定义 View 1-8 硬件加速</h1>
+						<div class="post-meta">
+							发布于 <time class="published" datetime="2017-09-18">2017年09月18日</time> <span class="reading-time"><span class="eta"></span> 前读过</span>
+						</div><!-- .post-meta -->
+						<a href="#" class="scroll-down square light"><i class="icon-chevron-down" aria-hidden="true"></i><span class="screen-reader-text">Scroll Down</span></a>
+					</div><!-- .inner -->
+				</div><!-- .cover-content -->
+			</header><!-- .cover -->
+			<div class="post-content inner">
+				<p>硬件加速这个词每当被提及，很多人都会感兴趣。这个词给大部分人的概念大致有两个：快速、不稳定。对很多人来说，硬件加速似乎是一个只可远观而不可亵玩的高端科技：是，我听说它很牛逼，但我不敢「乱」用，因为我怕 hold 不住。</p>
+
+<p>今天我试着就把硬件加速的外衣脱掉（并没有），聊一聊它的原理和应用：</p>
+
+<ol>
+<li>硬件加速的本质和原理；  </li>
+<li>硬件加速在 Android 中的应用；  </li>
+<li>硬件加速在 Android 中的限制。</li>
+</ol>
+
+<blockquote>
+  <p>本篇是 「HenCoder Android 开发进阶」自定义 View 部分的最后一篇：硬件加速。</p>
+
+  <p>如果你没听说过 HenCoder，也可以看看这个： <br />
+  <a href="http://hencoder.com/overview">HenCoder：给高级 Android 工程师的进阶手册</a></p>
+</blockquote>
+
+<h2 id="">概念</h2>
+
+<p>在正式开始之前需要说明一下，作为绘制部分的最后一期，本期内容只是为了内容的完整性做一个补充，因为之前好几期的内容里都有涉及硬件加速的技术点，而一些读者因为不了解硬件加速而产生了一些疑问。所以仅仅从难度上来讲，这期的内容并不难，并且本期的大部分内容你都可以从这两个页面中找到：</p>
+
+<ol>
+<li><a href="https://developer.android.google.cn/guide/topics/graphics/hardware-accel.html">Hardware Acceleration | Android Developers</a>  </li>
+<li><a href="https://www.youtube.com/watch?v=v9S5EO7CLjo">Google I/O 2011: Accelerated Android Rendering</a></li>
+</ol>
+
+<p>下面进入正题。</p>
+
+<p>所谓硬件加速，指的是把某些计算工作交给专门的硬件来做，而不是和普通的计算工作一样交给 CPU 来处理。这样不仅减轻了 CPU 的压力，而且由于有了「专人」的处理，这份计算工作的速度也被加快了。这就是「硬件加速」。</p>
+
+<p>而对于 Android 来说，硬件加速有它专属的意思：在 Android 里，硬件加速专指把 View 中绘制的计算工作交给 GPU 来处理。进一步地再明确一下，这个「绘制的计算工作」指的就是把绘制方法中的那些 <code>Canvas.drawXXX()</code> 变成实际的像素这件事。</p>
+
+<h2 id="">原理</h2>
+
+<p>在硬件加速关闭的时候，<code>Canvas</code> 绘制的工作方式是：把要绘制的内容写进一个 <code>Bitmap</code>，然后在之后的渲染过程中，这个 <code>Bitmap</code> 的像素内容被直接用于渲染到屏幕。这种绘制方式的主要计算工作在于把绘制操作转换为像素的过程（例如由一句 <code>Canvas.drawCircle()</code> 来获得一个具体的圆的像素信息），这个过程的计算是由 CPU 来完成的。大致就像这样：</p>
+
+<p><img src="http://ws3.sinaimg.cn/large/006tKfTcly1fjmybsw31fj30nb0iywfq.jpg" alt="" /></p>
+
+<p>而在硬件加速开启时，<code>Canvas</code> 的工作方式改变了：它只是把绘制的内容转换为 GPU 的操作保存了下来，然后就把它交给 GPU，最终由 GPU 来完成实际的显示工作。大致是这样：</p>
+
+<p><img src="http://ws3.sinaimg.cn/large/006tKfTcly1fjmygtwiutj30nb0o2ta8.jpg" alt="" /></p>
+
+<blockquote>
+  <p>如图，在硬件加速开启时，CPU 做的事只是把绘制工作转换成 GPU 的操作，这个工作量相对来说是非常小的。</p>
+</blockquote>
+
+<h2 id="">怎么就「加速」了？</h2>
+
+<p>从上面的图中可以看出，硬件加速开启后，绘制的计算工作由 CPU 转交给了 GPU。不过这怎么就能起到「加速」作用，让绘制变快了呢？</p>
+
+<p>硬件加速能够让绘制变快，主要有三个原因：</p>
+
+<ol>
+<li>本来由 CPU 自己来做的事，分摊给了 GPU 一部分，自然可以提高效率；  </li>
+<li>相对于 CPU 来说，GPU 自身的设计本来就对于很多常见类型内容的计算（例如简单的圆形、简单的方形）具有优势；  </li>
+<li>由于绘制流程的不同，硬件加速在界面内容发生重绘的时候绘制流程可以得到优化，避免了一些重复操作，从而大幅提升绘制效率。</li>
+</ol>
+
+<p>其中前两点可以总结为一句：<strong>用了 GPU，绘制就是快。</strong>原因很直观，不再多说。</p>
+
+<p>关于第三点，它的原理我大致说一下：</p>
+
+<p>前面说到，在硬件加速关闭时，绘制内容会被 CPU 转换成实际的像素，然后直接渲染到屏幕。具体来说，这个「实际的像素」，它是由 <code>Bitmap</code> 来承载的。在界面中的某个 View 由于内容发生改变而调用 <code>invalidate()</code> 方法时，如果没有开启硬件加速，那么为了正确计算 <code>Bitmap</code> 的像素，这个 <code>View</code> 的父 View、父 View 的父 View 乃至一直向上直到最顶级 View，以及所有和它相交的兄弟 <code>View</code>，都需要被调用 <code>invalidate()</code>来重绘。一个 View 的改变使得大半个界面甚至整个界面都重绘一遍，这个工作量是非常大的。</p>
+
+<p>而在硬件加速开启时，前面说过，绘制的内容会被转换成 GPU 的操作保存下来（承载的形式称为 display list，对应的类也叫做 <code>DisplayList</code>），再转交给 GPU。由于所有的绘制内容都没有变成最终的像素，所以它们之间是相互独立的，那么在界面内容发生改变的时候，只要把发生了改变的 View 调用 <code>invalidate()</code> 方法以更新它所对应的 GPU 操作就好，至于它的父 View 和兄弟 View，只需要保持原样。那么这个工作量就很小了。</p>
+
+<p>正是由于上面的原因，硬件加速不仅是由于 GPU 的引入而提高了绘制效率，还<strong>由于绘制机制的改变，而极大地提高了界面内容改变时的刷新效率。</strong></p>
+
+<p>所以把上面的三条压缩总结一下，硬件加速更快的原因有两条：</p>
+
+<ol>
+<li>用了 GPU，绘制变快了；  </li>
+<li>绘制机制的改变，导致界面内容改变时的刷新效率极大提高。</li>
+</ol>
+
+<h2 id="">限制</h2>
+
+<p>如果仅仅是这样，硬件加速只有好处没有缺陷，那大家都不必关心硬件加速了，这篇文章也不会出现：既然是好东西就用呗，关心那么多原理干吗？</p>
+
+<p>可事实就是，硬件加速不只是好处，也有它的限制：受到 GPU 绘制方式的限制，<code>Canvas</code> 的有些方法在硬件加速开启式会失效或无法正常工作。比如，在硬件加速开启时， <code>clipPath()</code> 在 API 18 及以上的系统中才有效。具体的 API 限制和 API 版本的关系如下图：</p>
+
+<p><img src="http://ws2.sinaimg.cn/large/006tKfTcly1fjn0huxdm5j30lr0q0n25.jpg" alt="" /></p>
+
+<p>所以，如果你的自定义控件中有自定义绘制的内容，最好参照一下这份表格，确保你的绘制操作可以正确地在所有用户的手机里能够正常显示，而不是只在你的运行了最新版本 Android 系统的 Nexus 或 Pixel 里测试一遍没问题就发布了。小心被祭天。</p>
+
+<p>不过有一点可以放心的是，所有的原生自带控件，都没有用到 API 版本不兼容的绘制操作，可以放心使用。所以你只要检查你写的自定义绘制就好。</p>
+
+<h2 id="viewlayer">View Layer</h2>
+
+<p>在之前几期的内容里我提到过几次，如果你的绘制操作不支持硬件加速，你需要手动关闭硬件加速来绘制界面，关闭的方式是通过这行代码：</p>
+
+<pre><code class="language-java">view.setLayerType(LAYER_TYPE_SOFTWARE, null);
+</code></pre>
+
+<p>有不少人都有过疑问：什么是 layer type？如果这个方法是硬件加速的开关，那么它的参数为什么不是一个 <code>LAYER_TYPE_SOFTWARE</code> 来关闭硬件加速以及一个 <code>LAYER_TYPE_HARDWARE</code> 来打开硬件加速这么两个参数，而是三个参数，在 <code>SOFTWARE</code> 和 <code>HARDWARE</code> 之外还有一个 <code>LAYER_TYPE_NONE</code>？难道还能既不用软件绘制，也不用硬件绘制吗？</p>
+
+<p><img src="http://ws3.sinaimg.cn/large/006tKfTcgy1fjnhdt0s41j3069069wep.jpg" alt="" /></p>
+
+<p>事实上，这个方法的本来作用并不是用来开关硬件加速的，只是当它的参数为 <code>LAYER_TYPE_SOFTWARE</code> 的时候，可以「顺便」把硬件加速关掉而已；并且除了这个方法之外，Android 并没有提供专门的 View 级别的硬件加速开关，所以它就「顺便」成了一个开关硬件加速的方法。</p>
+
+<p><code>setLayerType()</code> 这个方法，它的作用其实就是名字里的意思：设置 View Layer 的类型。所谓 View Layer，又称为离屏缓冲（Off-screen Buffer），它的作用是单独启用一块地方来绘制这个 View ，而不是使用软件绘制的 Bitmap 或者通过硬件加速的 GPU。这块「地方」可能是一块单独的 <code>Bitmap</code>，也可能是一块 OpenGL 的纹理（texture，OpenGL 的纹理可以简单理解为图像的意思），具体取决于硬件加速是否开启。采用什么来绘制 View 不是关键，关键在于当设置了 View Layer 的时候，它的绘制会被缓存下来，而且缓存的是最终的绘制结果，而不是像硬件加速那样只是把 GPU 的操作保存下来再交给 GPU 去计算。通过这样更进一步的缓存方式，View 的重绘效率进一步提高了：只要绘制的内容没有变，那么不论是 CPU 绘制还是 GPU 绘制，它们都不用重新计算，而只要只用之前缓存的绘制结果就可以了。</p>
+
+<blockquote>
+  <p>多说一句，其实这个离屏缓冲（Off-screen Buffer），更准确的说应该叫做离屏缓存（Off-screen Cache）会更合适一点。原因在上面这一段里已经说过了，因为它其实是缓存而不是缓冲。（这段话仅代表个人意见）</p>
+</blockquote>
+
+<p>基于这样的原理，在进行移动、旋转等（无需调用 <code>invalidate()</code>）的属性动画的时候开启 Hardware Layer 将会极大地提升动画的效率，因为在动画过程中 View 本身并没有发生改变，只是它的位置或角度改变了，而这种改变是可以由 GPU 通过简单计算就完成的，并不需要重绘整个 View。所以在这种动画的过程中开启 Hardware Layer，可以让本来就依靠硬件加速而变流畅了的动画变得更加流畅。实现方式大概是这样：</p>
+
+<pre><code class="language-java">view.setLayerType(LAYER_TYPE_HARDWARE, null);
+ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotationY", 180);
+
+animator.addListener(new AnimatorListenerAdapter() {
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        view.setLayerType(LAYER_TYPE_NONE, null);
+    }
+});
+
+animator.start();
+</code></pre>
+
+<p>或者如果是使用 <code>ViewPropertyAnimator</code>，那么更简单：</p>
+
+<pre><code class="language-java">view.animate()
+        .rotationY(90)
+        .withLayer(); // withLayer() 可以自动完成上面这段代码的复杂操作
+</code></pre>
+
+<p>不过一定要注意，只有你在对 <code>translationX</code> <code>translationY</code> <code>rotation</code> <code>alpha</code> 等无需调用 <code>invalidate()</code> 的属性做动画的时候，这种方法才适用，因为这种方法本身利用的就是当界面不发生时，缓存未更新所带来的时间的节省。所以简单地说——</p>
+
+<p><strong>这种方式不适用于基于自定义属性绘制的动画。</strong>一定记得这句话。</p>
+
+<p>另外，除了用于关闭硬件加速和辅助属性动画这两项功能外，Layer 还可以用于给 View 增加一些绘制效果，例如设置一个 <code>ColorMatrixColorFilter</code> 来让 View 变成黑白的：</p>
+
+<pre><code class="language-java">ColorMatrix colorMatrix = new ColorMatrix();
+colorMatrix.setSaturation(0);
+
+Paint paint = new Paint();
+paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+
+view.setLayerType(LAYER_TYPE_HARDWARE, paint);
+</code></pre>
+
+<p>另外，由于设置了 View Layer 后，View 在初次绘制时以及每次 <code>invalidate()</code> 后重绘时，需要进行两次的绘制工作（一次绘制到 Layer，一次从 Layer 绘制到显示屏），所以其实它的每次绘制的效率是被降低了的。所以一定要慎重使用 View Layer，在需要用到它的时候再去使用。</p>
+
+<h2 id="">总结</h2>
+
+<p>本期内容就到这里，就像开头处我说的，本期只是作为一个完整性的补充，并没有太多重要或高难度的东西，我也没有准备视频或太多的截图或动图来做说明。惯例总结一下：</p>
+
+<p>硬件加速指的是使用 GPU 来完成绘制的计算工作，代替 CPU。它从工作分摊和绘制机制优化这两个角度提升了绘制的速度。</p>
+
+<p>硬件加速可以使用 <code>setLayerType()</code> 来关闭硬件加速，但这个方法其实是用来设置 View Layer 的：</p>
+
+<ol>
+<li>参数为 <code>LAYER_TYPE_SOFTWARE</code> 时，使用软件来绘制 View Layer，绘制到一个 Bitmap，并顺便关闭硬件加速；  </li>
+<li>参数为 <code>LAYER_TYPE_HARDWARE</code> 时，使用 GPU 来绘制 View Layer，绘制到一个 OpenGL texture（如果硬件加速关闭，那么行为和 <code>VIEW_TYPE_SOFTWARE</code> 一致）；  </li>
+<li>参数为 <code>LAYER_TYPE_NONE</code> 时，关闭 View Layer。</li>
+</ol>
+
+<p>View Layer 可以加速无 <code>invalidate()</code> 时的刷新效率，但对于需要调用 <code>invalidate()</code> 的刷新无法加速。</p>
+
+<p>View Layer 绘制所消耗的实际时间是比不使用 View Layer 时要高的，所以要慎重使用。</p>
+				<hr/>
+			</div><!-- .post-content -->
+			<footer class="post-footer inner">
+
+				<div class="inner" style="padding: 0">
+					<a href="https://plus.hencoder.com" target="_blank">
+						<img src="http://wx2.sinaimg.cn/large/007l3kkIly1g3i0eyb83og30nq03e49l.gif" />
+					</a>
+					<div class="subscribe-box">
+						<h2 class="subscribe-box-title">订阅 HenCoder</h2>
+						<!-- Begin MailChimp Signup Form -->
+						<div id="mc_embed_signup">
+							<form action="https://hencoder.us16.list-manage.com/subscribe/post?u=faef49bdd28520162596a50e8&amp;id=44512776ac" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+								<div id="mc_embed_signup_scroll">
+									<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="邮箱" required>
+									<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+									<div style="position: absolute; left: -5000px;" aria-hidden="true">
+										<input type="text" name="b_faef49bdd28520162596a50e8_44512776ac" tabindex="-1" value="">
+									</div>
+									<div class="clear">
+										<input type="submit" value="订 阅" name="subscribe" id="mc-embedded-subscribe" class="button">
+									</div>
+								</div>
+							</form>
+						</div>
+						<!--End mc_embed_signup-->
+						<p>微信公众号：HenCoder&nbsp;&nbsp;&nbsp;&nbsp;微博：<a href='https://weibo.com/rengwuxian' target="_blank" class="black-subscribe">扔物线</a><br/>
+							知乎专栏：<a href='https://zhuanlan.zhihu.com/hencoder' target="_blank" class="black-subscribe">HenCoder</a>&nbsp;&nbsp;&nbsp;&nbsp;稀土掘金：<a href='https://juejin.im/user/552f20a7e4b060d72a89d87f' target="_blank" class="black-subscribe">扔物线</a><br/>
+							<img src="http://ww1.sinaimg.cn/large/671477efly1fu4gsk3zs7j203l03l74d.jpg" />
+						</p>
+					</div>
+				</div>
+
+				<!-- JiaThis Button BEGIN -->
+				<div class="jiathis_style_32x32">
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_cqq"></a>
+					<a class="jiathis_button_ydnote"></a>
+					<a class="jiathis_button_evernote"></a>
+					<a class="jiathis_button_email"></a>
+					<a href="http://www.jiathis.com/share?uid=2139777" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+					<a class="jiathis_counter_style"></a>
+				</div>
+				<script type="text/javascript" >
+					var jiathis_config={
+						data_track_clickback:true,
+						summary:"",
+						shortUrl:false,
+						hideMore:false
+					}
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2139777" charset="utf-8"></script>
+				<!-- JiaThis Button END -->
+
+				<!-- 来必力City版安装代码 -->
+				<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQwMi81OTcw">
+				<script type="text/javascript">
+				(function(d, s) {
+					var j, e = d.getElementsByTagName(s)[0];
+
+					if (typeof LivereTower === 'function') { return; }
+
+					j = d.createElement(s);
+					j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+					j.async = true;
+
+					e.parentNode.insertBefore(j, e);
+				})(document, 'script');
+				</script>
+				<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+				</div>
+				<!-- City版安装代码已完成 -->
+			</footer><!-- .post-footer -->
+		</article><!-- .post -->
+
+
+		<nav class="post-navigation">
+			<a href="/activity-mock-1/" class="nav-next">
+				<div class="nav-bg" style="background-image: url(/content/images/2017/10/Screen-Shot-2017-10-13-at-09.27.11.png)"></div>
+				<div class="nav-inside">
+					<span class="nav-before">Next</span><span class="nav-title">HenCoder「仿写酷界面」活动——征稿</span><span class="nav-date">October 13, 2017</span>
+				</div>
+			</a>
+			<a href="/ui-1-7/" class="nav-previous">
+				<div class="nav-bg" style="background-image: url(/content/images/2017/09/Screen-Shot-2017-09-11-at-12.50.49.png)"></div>
+				<div class="nav-inside">
+					<span class="nav-before">Previous</span><span class="nav-title">HenCoder Android 自定义 View 1-7：属性动画 Property Animation（进阶篇）</span><span class="nav-date">September 11, 2017</span>
+				</div>
+			</a>
+		</nav><!-- .post-navigation -->
+
+	</div><!-- .site-content -->
+</main><!-- .site-main -->
+
+		<aside class="sidebar" aria-label="Sidebar">
+	<div class="sidebar-scrollable">
+		<div class="widget-area">
+				<nav class="site-navigation" aria-label="Main Menu">
+	<h2 class="screen-reader-text">浏览网站</h2>
+	<ul class="menu">
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/">首页</a></li>
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/tag/about/">面世宣言</a></li>
+		<li class="menu-item hencoder-plus" role="presentation"><a href="https://plus.hencoder.com/">HenCoder Plus</a></li>
+		<li class="menu-item " role="presentation"><a href="http://kaixue.io/">码上开学</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/hui-zhi/">自定义 View - 绘制</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/bu-ju/">自定义 View - 布局</a></li>
+		<li class="menu-item -view-" role="presentation"><a href="http://hencoder.com/tag/chu-mo-fan-kui/">自定义 View - 触摸反馈</a></li>
+		<li class="menu-item " role="presentation"><a href="http://hencoder.com/tag/shi-jian/">实践</a></li>
+		<li class="menu-item https" role="presentation"><a href="http://hencoder.com/tag/https/">HTTPS</a></li>
+		<li class="menu-item git-" role="presentation"><a href="https://juejin.im/book/5a124b29f265da431d3c472e">Git 教程</a></li>
+	</ul><!-- .menu -->
+</nav><!-- .site-navigation -->
+
+			<section class="widget widget-text">
+				<h2 class="widget-title">关于 HenCoder</h2>
+				<p>这是一个个人的 Android 技术分享站。我对它充满期待，我认为它可以帮助到整个中国的 Android 界，但我还不确定。拭目以待。</p>
+			</section><!-- .widget -->
+			<section class="widget widget-text">
+				<h2 class="widget-title">关于我</h2>
+				<p>我是扔物线，<a href="https://developers.google.com/experts/people/kai-zhu" target="_blank">Android GDE</a>（ Google 认证 Android 开发专家），前 Flipboard Android 工程师。 GitHub 全球 Java 排名第 124 位，在 <a href="https://github.com/rengwuxian" target="_blank">GitHub</a> 上有 6.1k followers 和 9.2k stars ，个人的 Android 开源库 <a href="https://github.com/rengwuxian/MaterialEditText/" target="_blank">MaterialEditText</a> 被全世界多个项目引用，其中包括在全球拥有 5 亿用户的新闻阅读软件 Flipboard 。曾多次在 Google Developer Group Beijing 线下分享会中担任 Android 部分的讲师。个人技术文章《<a href="https://gank.io/post/560e15be2dca930e00da1083" target="_blank">给 Android 开发者的 RxJava 详解</a>》发布后，在国内多个公司和团队内部被转发分享和作为团队技术会议的主要资料来源，以及逆向传播到了美国一些如 Google 、 Uber 等公司的部分华人团队。
+				</p>
+				<ul class="contacts">
+					<li><span class="icon icon-envelope" aria-hidden="true"></span> rengwuxian@gmail.com</li>
+				</ul>
+			</section><!-- .widget -->
+		</div><!-- .widget-area -->
+		<a class="sidebar-toggle"><span class="screen-reader-text">关闭侧栏</span><span class="icon" aria-hidden="true"></span></a>
+	</div><!-- .sidebar-scrollable -->
+</aside><!-- .sidebar -->
+		<aside class="footer-widgets">
+	<div class="inner-wide">
+	</div><!-- .inner-wide -->
+</aside><!-- .footer-widgets -->
+		<footer class="site-footer">
+	<div class="footer-top">
+		<div class="inner-wide" hidden>
+			<div class="offsite-links">
+				<a href="https://github.com/rengwuxian"><i class="icon-weibo" aria-hidden="true"></i><span class="screen-reader-text">微博</span></a>
+				<a href="https://github.com/rengwuxian"><i class="icon-github" aria-hidden="true"></i><span class="screen-reader-text">GitHub</span></a>
+				<a href="https://github.com/rengwuxian"><i class="icon-github" aria-hidden="true"></i><span class="screen-reader-text">GitHub</span></a>
+			</div><!-- .offsite-links -->
+			<a href="#page" class="top-link square"><i class="icon-chevron-up" aria-hidden="true"></i><span class="screen-reader-text">Back to the top</span></a>
+		</div><!-- .inner -->
+	</div><!-- .footer-top -->
+	<div class="site-info inner-wide">
+		<p><a href="http://hencoder.com">HenCoder</a> &copy; 2019 <br />Curious theme by <a target="_blank" href="https://justgoodthemes.com/">JustGoodThemes</a></p>
+	</div><!-- .site-info -->
+</footer><!-- .site-footer -->
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/faef49bdd28520162596a50e8/3ba93690504a26b7daba7343f.js");</script>
+		<div class="overlay"></div>
+	</div><!-- #page -->
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', '9764080d8a54f160']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+	<script type="text/javascript" src="/assets/js/plugins.js?v=c5687a52e8"></script>
+	<script type="text/javascript" src="/assets/js/custom.js?v=c5687a52e8"></script>
+</body>
+</html>

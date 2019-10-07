@@ -14,6 +14,9 @@ import com.zhyen.test.R;
  */
 public class TestViewAnimationActivity extends TestBaseCustomViewActivity {
     {
+
+        pageModels.add(new PageModel(R.layout.test_animator_webview, "动画", R.layout.test_sample_clip_rect));
+
         pageModels.add(new PageModel(R.layout.test_animator_translation_view, "平移动画XYZ", R.layout.test_view_after_on_draw));
 
         pageModels.add(new PageModel(R.layout.test_animator_rotation_view, "旋转动画XY", R.layout.test_view_after_on_draw));

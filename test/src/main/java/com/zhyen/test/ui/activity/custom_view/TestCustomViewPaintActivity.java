@@ -6,7 +6,7 @@ import com.zhyen.test.R;
 public class TestCustomViewPaintActivity extends TestBaseCustomViewActivity {
 
     {
-        pageModels.add(new PageModel(R.layout.test_view_paint_demo, "Paint练习", R.layout.test_view_practice_color));
+        pageModels.add(new PageModel(R.layout.test_view_paint_webview, "Paint练习", R.layout.test_view_practice_color));
         /**
          * 除了直接设置颜色， Paint 还可以使用 Shader 。
          *

@@ -11,6 +11,7 @@ import com.zhyen.test.R;
  */
 public class TestAnimatorEvaluatorActivity extends TestBaseCustomViewActivity {
     {
+        pageModels.add(new PageModel(R.layout.test_animator_evluator_webview, "动画进阶", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_argb_evaluator_view, "ARGBEvaluator", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_hsv_evaluator_view, "HsvEvaluator", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_of_object_evaluator_view, "ofObject", R.layout.test_sample_clip_rect));

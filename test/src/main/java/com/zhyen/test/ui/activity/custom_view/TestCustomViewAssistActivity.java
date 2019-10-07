@@ -4,6 +4,7 @@ import com.zhyen.test.R;
 
 public class TestCustomViewAssistActivity extends TestBaseCustomViewActivity {
     {
+        pageModels.add(new PageModel(R.layout.test_draw_assist_webview, "辅助绘制", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_sample_clip_rect, "矩形裁剪", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_sample_clip_path, "路径裁剪", R.layout.test_sample_clip_rect));
         pageModels.add(new PageModel(R.layout.test_sample_translate, "平移", R.layout.test_sample_clip_rect));

@@ -4,6 +4,7 @@ import com.zhyen.test.R;
 
 public class TestCustomViewTextActivity extends TestBaseCustomViewActivity {
     {
+        pageModels.add(new PageModel(R.layout.test_draw_text_webview, "绘制文字", R.layout.test_sample_draw_text));
         pageModels.add(new PageModel(R.layout.test_sample_draw_text, "drawText", R.layout.test_sample_draw_text));
         pageModels.add(new PageModel(R.layout.test_sample_static_layout, "staticLayout", R.layout.test_sample_draw_text));
         pageModels.add(new PageModel(R.layout.test_sample_set_text_size, "setTextSize", R.layout.test_sample_draw_text));
@@ -22,6 +23,6 @@ public class TestCustomViewTextActivity extends TestBaseCustomViewActivity {
 
     @Override
     protected String getTitleName() {
-        return "DrawText";
+        return "绘制文字";
     }
 }

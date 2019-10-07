@@ -69,6 +69,12 @@
             android:layout_height="wrap_content"
             android:text="动画Evaluator" />
 
+        <Button
+            android:id="@+id/btn_test_hardware_accelerated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="硬件加速" />
+
     </LinearLayout>
 
 </FrameLayout>

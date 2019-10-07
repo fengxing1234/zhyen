@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhyen.test">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application>
         <activity android:name=".ui.activity.custom_view.TestCustomViewDrawActivity" />
         <activity android:name=".ui.activity.custom_view.TestCustomViewPaintActivity" />
@@ -11,5 +13,6 @@
         <activity android:name=".ui.activity.custom_view.TestViewDrawOrderActivity" />
         <activity android:name=".ui.activity.custom_view.TestViewAnimationActivity" />
         <activity android:name=".ui.activity.custom_view.TestAnimatorEvaluatorActivity" />
+        <activity android:name=".ui.activity.custom_view.TestHardwareAcceleratedActivity" />
     </application>
 </manifest>

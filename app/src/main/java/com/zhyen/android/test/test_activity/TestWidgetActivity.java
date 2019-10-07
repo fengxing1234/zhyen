@@ -16,6 +16,7 @@ import com.zhyen.test.ui.activity.custom_view.TestCustomViewAssistActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewDrawActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewPaintActivity;
 import com.zhyen.test.ui.activity.custom_view.TestCustomViewTextActivity;
+import com.zhyen.test.ui.activity.custom_view.TestHardwareAcceleratedActivity;
 import com.zhyen.test.ui.activity.custom_view.TestViewAnimationActivity;
 import com.zhyen.test.ui.activity.custom_view.TestViewDrawOrderActivity;
 import com.zhyen.test.ui.activity.custom_view.TestViewPaintPracticeActivity;
@@ -39,6 +40,7 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btn_test_draw_order).setOnClickListener(this);
         findViewById(R.id.btn_test_animator).setOnClickListener(this);
         findViewById(R.id.btn_test_animator_evaluator).setOnClickListener(this);
+        findViewById(R.id.btn_test_hardware_accelerated).setOnClickListener(this);
     }
 
     @Override
@@ -89,6 +91,11 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
 
         if (v.getId() == R.id.btn_test_animator_evaluator) {
             Intent intent = new Intent(this, TestAnimatorEvaluatorActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.btn_test_hardware_accelerated) {
+            Intent intent = new Intent(this, TestHardwareAcceleratedActivity.class);
             startActivity(intent);
         }
     }

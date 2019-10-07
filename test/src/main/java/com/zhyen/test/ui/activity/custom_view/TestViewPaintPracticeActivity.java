@@ -5,6 +5,7 @@ import com.zhyen.test.R;
 public class TestViewPaintPracticeActivity extends TestBaseCustomViewActivity {
 
     {
+        pageModels.add(new PageModel(R.layout.test_view_paint_webview, "Paint练习", R.layout.test_view_practice_color));
         pageModels.add(new PageModel(R.layout.test_practice_linear_gradient, "线性渐变", R.layout.test_view_practice_color));
         pageModels.add(new PageModel(R.layout.test_practice_radial_gradient, "辐射渐变", R.layout.test_view_practice_color));
         pageModels.add(new PageModel(R.layout.test_practice_sweep_gradient, "扫描渐变", R.layout.test_view_practice_color));

@@ -86,6 +86,7 @@ import com.zhyen.test.R;
  */
 public class TestViewDrawOrderActivity extends TestBaseCustomViewActivity {
     {
+        pageModels.add(new PageModel(R.layout.test_draw_order_webview, "绘制顺序", R.layout.test_view_after_on_draw));
         pageModels.add(new PageModel(R.layout.test_view_after_on_draw, "onDraw之后", R.layout.test_view_after_on_draw));
         pageModels.add(new PageModel(R.layout.test_view_before_on_draw, "onDraw之前", R.layout.test_view_after_on_draw));
         pageModels.add(new PageModel(R.layout.test_view_on_draw_layout, "onDraw在Layout中", R.layout.test_view_after_on_draw));
