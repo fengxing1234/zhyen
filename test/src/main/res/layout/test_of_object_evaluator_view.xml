@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <com.zhyen.test.widget.test_evaluator.TestOfObjectEvaluatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zhyen.test.widget.test_evaluator.TestOfObjectEvaluatorView
+            android:id="@+id/test_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/test_btn_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放" />
+    </com.zhyen.test.widget.test_evaluator.TestOfObjectEvaluatorLayout>
+</androidx.core.widget.NestedScrollView>

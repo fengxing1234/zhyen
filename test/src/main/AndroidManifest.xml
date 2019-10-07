@@ -9,6 +9,7 @@
         <activity android:name=".ui.activity.custom_view.TestCustomViewTextActivity" />
         <activity android:name=".ui.activity.custom_view.TestCustomViewAssistActivity" />
         <activity android:name=".ui.activity.custom_view.TestViewDrawOrderActivity" />
-        <activity android:name=".ui.activity.custom_view.TestViewAnimationActivity"/>
+        <activity android:name=".ui.activity.custom_view.TestViewAnimationActivity" />
+        <activity android:name=".ui.activity.custom_view.TestAnimatorEvaluatorActivity" />
     </application>
 </manifest>

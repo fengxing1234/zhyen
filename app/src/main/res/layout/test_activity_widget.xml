@@ -63,6 +63,12 @@
             android:layout_height="wrap_content"
             android:text="动画" />
 
+        <Button
+            android:id="@+id/btn_test_animator_evaluator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动画Evaluator" />
+
     </LinearLayout>
 
 </FrameLayout>
