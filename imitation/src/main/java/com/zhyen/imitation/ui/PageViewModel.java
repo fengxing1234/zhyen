@@ -1,4 +1,4 @@
-package com.zhyen.imitation.ui.main;
+package com.zhyen.imitation.ui;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

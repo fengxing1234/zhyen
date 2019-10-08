@@ -27,5 +27,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, TestWidgetActivity.class));
             }
         });
+        findViewById(R.id.btn_imitation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(MainActivity.this, ImitationMainActivity.class));
+            }
+        });
     }
 }
