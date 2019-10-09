@@ -11,12 +11,13 @@
         android:layout_gravity="center_horizontal"
         app:o_tuv_count="109" />
 
-    <com.zhyen.imitation.widget.OldThumbUpView
+    <com.zhyen.imitation.widget.thumb_up.ThumbUpView
+        android:id="@+id/newThumbUpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
-        app:o_tuv_count="109999" />
+        app:tuv_count="109" />
 
     <View
         android:layout_width="20dp"
@@ -25,13 +26,13 @@
         android:layout_margin="10dp"
         android:background="@color/black" />
 
-    <com.zhyen.imitation.widget.MyThumbUpView
+    <com.zhyen.imitation.widget.MyOldThumbUpView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:count="109"
         android:layout_marginTop="20dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        app:count="109" />
 
     <!--    <com.zhyen.imitation.widget.ThumbUpView-->
     <!--        android:layout_width="wrap_content"-->
@@ -39,4 +40,30 @@
     <!--        android:layout_gravity="center_horizontal"-->
     <!--        android:layout_marginTop="20dp"-->
     <!--        android:padding="10dp" />-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.zhyen.imitation.widget.my_thump_up.MyThumbView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.zhyen.imitation.widget.my_thump_up.MyCountView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp" />
+    </LinearLayout>
+
+
+    <com.zhyen.imitation.widget.my_thump_up.MyThumbUpView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        app:mtuv_count="109" />
 </LinearLayout>

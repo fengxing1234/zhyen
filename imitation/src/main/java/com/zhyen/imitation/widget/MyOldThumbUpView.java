@@ -23,10 +23,10 @@ import androidx.annotation.Nullable;
 import com.zhyen.base.utils.UIUtils;
 import com.zhyen.imitation.R;
 
-public class MyThumbUpView extends View implements View.OnClickListener {
+public class MyOldThumbUpView extends View implements View.OnClickListener {
 
 
-    private static final String TAG = MyThumbUpView.class.getSimpleName();
+    private static final String TAG = MyOldThumbUpView.class.getSimpleName();
     //图标大小 单位dp
     private static final float BITMAP_WIDTH = 20f;
     private static final float BITMAP_HEIGHT = 20f;
@@ -103,17 +103,17 @@ public class MyThumbUpView extends View implements View.OnClickListener {
     private AnimatorSet currentAnim;
     private long lastClickTime;
 
-    public MyThumbUpView(Context context) {
+    public MyOldThumbUpView(Context context) {
         super(context);
         init(null);
     }
 
-    public MyThumbUpView(Context context, @Nullable AttributeSet attrs) {
+    public MyOldThumbUpView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public MyThumbUpView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MyOldThumbUpView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
@@ -121,8 +121,8 @@ public class MyThumbUpView extends View implements View.OnClickListener {
 
     private void init(AttributeSet attrs) {
 
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.MyThumbUpView);
-        mNumber = ta.getInteger(R.styleable.MyThumbUpView_count, 0);
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.MyOldThumbUpView);
+        mNumber = ta.getInteger(R.styleable.MyOldThumbUpView_count, 0);
         ta.recycle();
 
         OFFSET_MIN = 0;
@@ -168,7 +168,7 @@ public class MyThumbUpView extends View implements View.OnClickListener {
         mCirclePaint.setColor(START_COLOR);
     }
 
-    public MyThumbUpView setCount(int count) {
+    public MyOldThumbUpView setCount(int count) {
         this.mNumber = count;
         calculateChangeNum(0);
         requestLayout();
