@@ -32,5 +32,8 @@ dependencies {
 
     implementation project(':test')
     implementation project(':base')
-    //implementation project(':imitation')
+    if (!aloneDebug.toBoolean()) {
+        implementation project(':imitation')
+    }
+
 }
