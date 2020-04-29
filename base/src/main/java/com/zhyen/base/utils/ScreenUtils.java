@@ -1,9 +1,13 @@
 package com.zhyen.base.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -103,7 +107,94 @@ public class ScreenUtils {
         return density;
     }
 
-    public static int screenWidth(Context context) {
-        return context.getResources().getDisplayMetrics().widthPixels;
+    public static final float getHeightInPx(Context context) {
+        final float height = context.getResources().getDisplayMetrics().heightPixels;
+        return height;
+    }
+
+    public static final float getWidthInPx(Context context) {
+        final float width = context.getResources().getDisplayMetrics().widthPixels;
+        return width;
+    }
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 获得当前屏幕亮度的模式
+     * SCREEN_BRIGHTNESS_MODE_AUTOMATIC=1 为自动调节屏幕亮度
+     * SCREEN_BRIGHTNESS_MODE_MANUAL=0 为手动调节屏幕亮度
+     */
+    public static int getScreenBrightnessMode(Context context) {
+        int screenMode = -1;
+        try {
+            screenMode = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+        Log.i(TAG, "screenMode = " + screenMode);
+        return screenMode;
+    }
+
+    /**
+     * 设置当前屏幕亮度的模式
+     * SCREEN_BRIGHTNESS_MODE_AUTOMATIC=1 为自动调节屏幕亮度
+     * SCREEN_BRIGHTNESS_MODE_MANUAL=0 为手动调节屏幕亮度
+     */
+    public static void setScreenBrightnessMode(Context context, int value) {
+        Log.d(TAG, "setScreenBrightnessMode: " + value);
+        Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, value);
+    }
+
+    /**
+     * 获得当前屏幕亮度值 0--255
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenBrightness(Context context) {
+        try {
+            int brightness = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+            Log.d(TAG, "getScreenBrightness: " + brightness);
+            return brightness;
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static void setScreenBrightness(Context context, int value) {
+        Log.d(TAG, "setScreenBrightness: " + value);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.System.canWrite(context)) {
+                Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, value);
+            }
+        }
+    }
+
+    public static Intent getWriteSettings(Context context) {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+            intent.setData(Uri.parse("package:" + context.getPackageName()));
+        }
+        return intent;
+    }
+
+    /**
+     * 只改变当前Activity亮度 不改变系统亮度
+     *
+     * @param activity
+     * @param value
+     */
+    public static void setAcitivityBrightness(Activity activity, int value) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        int brightness = value / 100;
+        Log.d(TAG, "brightness: " + brightness);
+        lp.screenBrightness = brightness;
+        Log.d(TAG, "setScreenBrightness: " + lp.screenBrightness);
+        activity.getWindow().setAttributes(lp);
     }
 }
