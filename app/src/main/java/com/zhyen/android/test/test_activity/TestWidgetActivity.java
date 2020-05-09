@@ -1,6 +1,5 @@
 package com.zhyen.android.test.test_activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,17 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhyen.android.R;
-import com.zhyen.android.test.test_widget.TestCircularImageView;
-import com.zhyen.test.ui.activity.TestXfermodeActivity;
-import com.zhyen.test.ui.activity.custom_view.TestAnimatorEvaluatorActivity;
-import com.zhyen.test.ui.activity.custom_view.TestCustomViewAssistActivity;
-import com.zhyen.test.ui.activity.custom_view.TestCustomViewDrawActivity;
-import com.zhyen.test.ui.activity.custom_view.TestCustomViewPaintActivity;
-import com.zhyen.test.ui.activity.custom_view.TestCustomViewTextActivity;
-import com.zhyen.test.ui.activity.custom_view.TestHardwareAcceleratedActivity;
-import com.zhyen.test.ui.activity.custom_view.TestViewAnimationActivity;
-import com.zhyen.test.ui.activity.custom_view.TestViewDrawOrderActivity;
-import com.zhyen.test.ui.activity.custom_view.TestViewPaintPracticeActivity;
+
 
 public class TestWidgetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,58 +34,58 @@ public class TestWidgetActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if (v == btnXfermode) {
-            Intent intent = new Intent(this, TestXfermodeActivity.class);
-            startActivity(intent);
-        }
-        if (v.getId() == R.id.btn_circular_image) {
-            Intent intent = new Intent(this, TestCircularImageView.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_custom_draw) {
-            Intent intent = new Intent(this, TestCustomViewDrawActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_custom_paint) {
-            Intent intent = new Intent(this, TestCustomViewPaintActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_practice_paint) {
-            Intent intent = new Intent(this, TestViewPaintPracticeActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_practice_draw_text) {
-            Intent intent = new Intent(this, TestCustomViewTextActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_practice_draw_assist) {
-            Intent intent = new Intent(this, TestCustomViewAssistActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_draw_order) {
-            Intent intent = new Intent(this, TestViewDrawOrderActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_animator) {
-            Intent intent = new Intent(this, TestViewAnimationActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_animator_evaluator) {
-            Intent intent = new Intent(this, TestAnimatorEvaluatorActivity.class);
-            startActivity(intent);
-        }
-
-        if (v.getId() == R.id.btn_test_hardware_accelerated) {
-            Intent intent = new Intent(this, TestHardwareAcceleratedActivity.class);
-            startActivity(intent);
-        }
+//        if (v == btnXfermode) {
+//            Intent intent = new Intent(this, TestXfermodeActivity.class);
+//            startActivity(intent);
+//        }
+//        if (v.getId() == R.id.btn_circular_image) {
+//            Intent intent = new Intent(this, TestCircularImageView.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_custom_draw) {
+//            Intent intent = new Intent(this, TestCustomViewDrawActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_custom_paint) {
+//            Intent intent = new Intent(this, TestCustomViewPaintActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_practice_paint) {
+//            Intent intent = new Intent(this, TestViewPaintPracticeActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_practice_draw_text) {
+//            Intent intent = new Intent(this, TestCustomViewTextActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_practice_draw_assist) {
+//            Intent intent = new Intent(this, TestCustomViewAssistActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_draw_order) {
+//            Intent intent = new Intent(this, TestViewDrawOrderActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_animator) {
+//            Intent intent = new Intent(this, TestViewAnimationActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_animator_evaluator) {
+//            Intent intent = new Intent(this, TestAnimatorEvaluatorActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        if (v.getId() == R.id.btn_test_hardware_accelerated) {
+//            Intent intent = new Intent(this, TestHardwareAcceleratedActivity.class);
+//            startActivity(intent);
+//        }
     }
 }
