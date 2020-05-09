@@ -1,7 +1,5 @@
 package com.zhyen.android.test.test_interview;
 
-import android.util.Log;
-
 import com.zhyen.android.test.test_interview.binary.BinaryTree;
 import com.zhyen.android.test.test_interview.binary.BinaryTreeNode;
 import com.zhyen.android.test.test_interview.recursion.Fibonacci;
@@ -16,6 +14,7 @@ public class TreeTest {
         ArrayTreeNode[] arrayTreeNodes = new ArrayTreeNode[10];
         ArrayTreeNode<String> node = new ArrayTreeNode<>("0", 0);
         arrayTreeNodes[0] = node;
+        // Log.d(TAG, "main: " + arrayTreeNodes[0].getData());
         System.out.println("输出内容 = " + arrayTreeNodes[0].getData());
 
         int moveCount = new HanoiRecursion().hanoi(6, 'A', 'B', 'C');
