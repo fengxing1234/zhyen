@@ -1,6 +1,6 @@
 package com.zhyen.android.test.test_interview;
 
-public class Base<T> {
+public class BaseInterview<T> {
 
     private T t;
 
@@ -10,10 +10,5 @@ public class Base<T> {
 
     public T getT() {
         return t;
-    }
-
-    public <E, K> K print(E e, K k) {
-
-        return k;
     }
 }

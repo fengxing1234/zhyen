@@ -1,6 +1,6 @@
 package com.zhyen.android.test.test_interview;
 
-public class TestAnnotationRunTime {
+public class TestAnnotationClass {
 
     @TestAnnotation(value = "汪汪汪", name = "dog", index = 100)
     public String dog;
