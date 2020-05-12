@@ -16,6 +16,9 @@ import com.zhyen.base.design_mode.mediator_mode.AbstractMediator;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueA;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueB;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteMediator;
+import com.zhyen.base.design_mode.observer.ObserverA;
+import com.zhyen.base.design_mode.observer.ObserverB;
+import com.zhyen.base.design_mode.observer.ConcreteSubject;
 import com.zhyen.base.design_mode.prototype.ConcretePrototype;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
@@ -37,7 +40,22 @@ public class DesignMode {
         //模版方法
         //templateMethod();
         //中介者模式
-        mediatorMode();
+        //mediatorMode();
+        //观察者模式
+        observerMode();
+    }
+
+    public static void observerMode() {
+        ConcreteSubject subject = new ConcreteSubject();
+        ObserverA observerA = new ObserverA();
+        ObserverB observerB = new ObserverB();
+        subject.attach(observerA);
+        subject.attach(observerB);
+        subject.doSomething();
+        System.out.println("-------------");
+        subject.detach(observerA);
+        subject.detach(observerB);
+        subject.doSomething();
     }
 
     public static void mediatorMode() {
