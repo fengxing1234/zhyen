@@ -9,6 +9,13 @@ import com.zhyen.base.design_mode.builder.Computer2;
 import com.zhyen.base.design_mode.builder.Director;
 import com.zhyen.base.design_mode.builder.MoviesBuilder;
 import com.zhyen.base.design_mode.builder.PlayGameBuilder;
+import com.zhyen.base.design_mode.command_mode.UML.ChangHenCommand;
+import com.zhyen.base.design_mode.command_mode.UML.ConcreteCommandA;
+import com.zhyen.base.design_mode.command_mode.UML.ConcreteCommandB;
+import com.zhyen.base.design_mode.command_mode.UML.HeFenCommand;
+import com.zhyen.base.design_mode.command_mode.UML.HunTunCommand;
+import com.zhyen.base.design_mode.command_mode.UML.Invoke;
+import com.zhyen.base.design_mode.command_mode.UML.Waiter;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
@@ -49,7 +56,35 @@ public class DesignMode {
         //mediatorMode();
         //观察者模式
         //observerMode();
-        visitorMode();
+        //visitorMode();
+        //命令模式
+        //commandMode();
+        commandDemo();
+    }
+
+    private static void commandDemo() {
+        System.out.println("过来服务员");
+        Waiter waiter = new Waiter();
+        System.out.println("给我来份肠粉");
+        waiter.setChangFenCommand(new ChangHenCommand());
+        waiter.chooseChangFen();
+        System.out.println("给我来份河粉");
+        waiter.setHeFenCommand(new HeFenCommand());
+        waiter.chooseHeFen();
+        System.out.println("听说你家馄饨不错 来份尝尝");
+        waiter.setHunTunCommand(new HunTunCommand());
+        waiter.chooseHunTun();
+
+    }
+
+    private static void commandMode() {
+        ConcreteCommandA commandA = new ConcreteCommandA();
+        Invoke invoke = new Invoke(commandA);
+        invoke.cell();
+        System.out.println("--------------");
+        ConcreteCommandB commandB = new ConcreteCommandB();
+        invoke.setCommand(commandB);
+        invoke.cell();
     }
 
     public static void visitorMode() {
