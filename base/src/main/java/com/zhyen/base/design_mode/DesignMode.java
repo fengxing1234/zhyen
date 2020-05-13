@@ -23,6 +23,12 @@ import com.zhyen.base.design_mode.prototype.ConcretePrototype;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
 import com.zhyen.base.design_mode.template_method.ConcreteSort;
+import com.zhyen.base.design_mode.visitor_mode.ConcreteElementA;
+import com.zhyen.base.design_mode.visitor_mode.ConcreteElementB;
+import com.zhyen.base.design_mode.visitor_mode.ConcreteVisitorA;
+import com.zhyen.base.design_mode.visitor_mode.ConcreteVisitorB;
+import com.zhyen.base.design_mode.visitor_mode.IVisitor;
+import com.zhyen.base.design_mode.visitor_mode.ObjectStructure;
 
 public class DesignMode {
 
@@ -42,7 +48,19 @@ public class DesignMode {
         //中介者模式
         //mediatorMode();
         //观察者模式
-        observerMode();
+        //observerMode();
+        visitorMode();
+    }
+
+    public static void visitorMode() {
+        ObjectStructure structure = new ObjectStructure();
+        structure.add(new ConcreteElementA());
+        structure.add(new ConcreteElementB());
+        IVisitor concreteVisitorA = new ConcreteVisitorA();
+        structure.accept(concreteVisitorA);
+        System.out.println("------------------------");
+        ConcreteVisitorB visitorB = new ConcreteVisitorB();
+        structure.accept(visitorB);
     }
 
     public static void observerMode() {
