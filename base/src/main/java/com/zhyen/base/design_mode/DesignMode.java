@@ -35,6 +35,8 @@ import com.zhyen.base.design_mode.command_mode.UML.Waiter;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
+import com.zhyen.base.design_mode.iterator_mode.ConcreteAggregate;
+import com.zhyen.base.design_mode.iterator_mode.IIterator;
 import com.zhyen.base.design_mode.mediator_mode.AbstractMediator;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueA;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueB;
@@ -86,7 +88,26 @@ public class DesignMode {
         //chainOfResponsibility();
         //chainOfResponsibilityDemo();
         //okHttpInterceptor();
-        strategyUML();
+        //strategyUML();
+        //迭代器模式
+        iterator();
+
+    }
+
+    private static void iterator() {
+        ConcreteAggregate aggregate = new ConcreteAggregate();
+        aggregate.add("1");
+        aggregate.add("2");
+        aggregate.add("3");
+        IIterator iterator = aggregate.getIterator();
+        System.out.print("聚合的内容有：");
+        while (iterator.hasNext()) {
+            Object ob = iterator.next();
+            System.out.print(ob.toString() + "\t");
+        }
+        Object ob = iterator.first();
+        System.out.println("\nFirst：" + ob.toString());
+
     }
 
     private static void strategyUML() {
