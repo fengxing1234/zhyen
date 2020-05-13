@@ -45,6 +45,9 @@ import com.zhyen.base.design_mode.observer.ObserverB;
 import com.zhyen.base.design_mode.prototype.ConcretePrototype;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
+import com.zhyen.base.design_mode.strategy.UML.ConcreteStrategyA;
+import com.zhyen.base.design_mode.strategy.UML.ConcreteStrategyB;
+import com.zhyen.base.design_mode.strategy.UML.StrategyContext;
 import com.zhyen.base.design_mode.template_method.ConcreteSort;
 import com.zhyen.base.design_mode.visitor_mode.ConcreteElementA;
 import com.zhyen.base.design_mode.visitor_mode.ConcreteElementB;
@@ -82,7 +85,17 @@ public class DesignMode {
         //责任链模式
         //chainOfResponsibility();
         //chainOfResponsibilityDemo();
-        okHttpInterceptor();
+        //okHttpInterceptor();
+        strategyUML();
+    }
+
+    private static void strategyUML() {
+        StrategyContext strategy = new StrategyContext();
+        strategy.setStrategy(new ConcreteStrategyA());
+        strategy.strategy();
+        System.out.println("---------");
+        strategy.setStrategy(new ConcreteStrategyB());
+        strategy.strategy();
     }
 
     private static void okHttpInterceptor() {
