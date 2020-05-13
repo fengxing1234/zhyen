@@ -9,6 +9,22 @@ import com.zhyen.base.design_mode.builder.Computer2;
 import com.zhyen.base.design_mode.builder.Director;
 import com.zhyen.base.design_mode.builder.MoviesBuilder;
 import com.zhyen.base.design_mode.builder.PlayGameBuilder;
+import com.zhyen.base.design_mode.chain_of_responsibility.UML.ConcreteHandlerA;
+import com.zhyen.base.design_mode.chain_of_responsibility.UML.ConcreteHandlerB;
+import com.zhyen.base.design_mode.chain_of_responsibility.demo.ClassAdviser;
+import com.zhyen.base.design_mode.chain_of_responsibility.demo.Dean;
+import com.zhyen.base.design_mode.chain_of_responsibility.demo.DepartmentHead;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.BridgeInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.CacheInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.CallServerInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.ClientInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.ConnectInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.Interceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.NetworkInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.RealInterceptorChain;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.RetryInterceptor;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.TestRequest;
+import com.zhyen.base.design_mode.chain_of_responsibility.okhttp_demo.TestResponse;
 import com.zhyen.base.design_mode.command_mode.UML.ChangHenCommand;
 import com.zhyen.base.design_mode.command_mode.UML.ConcreteCommandA;
 import com.zhyen.base.design_mode.command_mode.UML.ConcreteCommandB;
@@ -23,9 +39,9 @@ import com.zhyen.base.design_mode.mediator_mode.AbstractMediator;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueA;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueB;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteMediator;
+import com.zhyen.base.design_mode.observer.ConcreteSubject;
 import com.zhyen.base.design_mode.observer.ObserverA;
 import com.zhyen.base.design_mode.observer.ObserverB;
-import com.zhyen.base.design_mode.observer.ConcreteSubject;
 import com.zhyen.base.design_mode.prototype.ConcretePrototype;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
@@ -36,6 +52,9 @@ import com.zhyen.base.design_mode.visitor_mode.ConcreteVisitorA;
 import com.zhyen.base.design_mode.visitor_mode.ConcreteVisitorB;
 import com.zhyen.base.design_mode.visitor_mode.IVisitor;
 import com.zhyen.base.design_mode.visitor_mode.ObjectStructure;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DesignMode {
 
@@ -59,7 +78,46 @@ public class DesignMode {
         //visitorMode();
         //命令模式
         //commandMode();
-        commandDemo();
+        //commandDemo();
+        //责任链模式
+        //chainOfResponsibility();
+        //chainOfResponsibilityDemo();
+        okHttpInterceptor();
+    }
+
+    private static void okHttpInterceptor() {
+        List<Interceptor> list = new ArrayList<>();
+        list.add(new ClientInterceptor());
+        list.add(new RetryInterceptor());
+        list.add(new BridgeInterceptor());
+        list.add(new CacheInterceptor());
+        list.add(new CallServerInterceptor());
+        list.add(new ConnectInterceptor());
+        list.add(new NetworkInterceptor());
+        TestRequest testRequest = new TestRequest();
+        RealInterceptorChain interceptorChain = new RealInterceptorChain(list, 0, testRequest);
+        TestResponse response = interceptorChain.proceed(testRequest);
+        System.out.println("request = " + testRequest.des);
+        System.out.println("response = " + response.des);
+
+    }
+
+    private static void chainOfResponsibilityDemo() {
+        ClassAdviser classAdviser = new ClassAdviser();
+        DepartmentHead departmentHead = new DepartmentHead();
+        Dean dean = new Dean();
+        classAdviser.setNext(departmentHead);
+        departmentHead.setNext(dean);
+        classAdviser.handlerRequest(11);
+
+    }
+
+    private static void chainOfResponsibility() {
+        ConcreteHandlerA handlerA = new ConcreteHandlerA();
+        ConcreteHandlerB handlerB = new ConcreteHandlerB();
+        handlerA.setNext(handlerB);
+        String request = handlerA.handlerRequest("request");
+        System.out.println(request);
     }
 
     private static void commandDemo() {
