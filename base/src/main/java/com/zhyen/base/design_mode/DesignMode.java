@@ -35,6 +35,7 @@ import com.zhyen.base.design_mode.command_mode.UML.Waiter;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
+import com.zhyen.base.design_mode.interpreter_mode.InterpreterContext;
 import com.zhyen.base.design_mode.iterator_mode.ConcreteAggregate;
 import com.zhyen.base.design_mode.iterator_mode.IIterator;
 import com.zhyen.base.design_mode.mediator_mode.AbstractMediator;
@@ -90,8 +91,17 @@ public class DesignMode {
         //okHttpInterceptor();
         //strategyUML();
         //迭代器模式
-        iterator();
+        //iterator();
+        interpreterMode();
+    }
 
+    private static void interpreterMode() {
+        InterpreterContext context = new InterpreterContext();
+        context.operation("韶关的老人");
+        context.operation("韶关的年轻人");
+        context.operation("广州的妇女");
+        context.operation("广州的儿童");
+        context.operation("山东的儿童");
     }
 
     private static void iterator() {
