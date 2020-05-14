@@ -1,4 +1,4 @@
-package com.zhyen.base.design_mode.prototype;
+package com.zhyen.base.design_mode.prototype_mode;
 
 import java.util.ArrayList;
 

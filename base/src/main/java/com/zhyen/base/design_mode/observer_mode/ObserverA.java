@@ -1,4 +1,4 @@
-package com.zhyen.base.design_mode.observer;
+package com.zhyen.base.design_mode.observer_mode;
 
 public class ObserverA implements IObserver {
     @Override

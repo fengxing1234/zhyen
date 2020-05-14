@@ -46,15 +46,18 @@ import com.zhyen.base.design_mode.memento_mode.UML.Caretaker;
 import com.zhyen.base.design_mode.memento_mode.UML.Originator;
 import com.zhyen.base.design_mode.memento_mode.demo.GirlStack;
 import com.zhyen.base.design_mode.memento_mode.demo.You;
-import com.zhyen.base.design_mode.observer.ConcreteSubject;
-import com.zhyen.base.design_mode.observer.ObserverA;
-import com.zhyen.base.design_mode.observer.ObserverB;
-import com.zhyen.base.design_mode.prototype.ConcretePrototype;
+import com.zhyen.base.design_mode.observer_mode.ConcreteSubject;
+import com.zhyen.base.design_mode.observer_mode.ObserverA;
+import com.zhyen.base.design_mode.observer_mode.ObserverB;
+import com.zhyen.base.design_mode.prototype_mode.ConcretePrototype;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
-import com.zhyen.base.design_mode.strategy.UML.ConcreteStrategyA;
-import com.zhyen.base.design_mode.strategy.UML.ConcreteStrategyB;
-import com.zhyen.base.design_mode.strategy.UML.StrategyContext;
+import com.zhyen.base.design_mode.state_mode.UML.StateContext;
+import com.zhyen.base.design_mode.state_mode.demo.ScoreContext;
+import com.zhyen.base.design_mode.state_mode.thread_state_demo.ThreadContext;
+import com.zhyen.base.design_mode.strategy_mode.UML.ConcreteStrategyA;
+import com.zhyen.base.design_mode.strategy_mode.UML.ConcreteStrategyB;
+import com.zhyen.base.design_mode.strategy_mode.UML.StrategyContext;
 import com.zhyen.base.design_mode.template_method.ConcreteSort;
 import com.zhyen.base.design_mode.visitor_mode.ConcreteElementA;
 import com.zhyen.base.design_mode.visitor_mode.ConcreteElementB;
@@ -93,13 +96,46 @@ public class DesignMode {
         //chainOfResponsibility();
         //chainOfResponsibilityDemo();
         //okHttpInterceptor();
+        //策略模式
         //strategyUML();
         //迭代器模式
         //iterator();
         //interpreterMode();
         //备忘录模式
         //mementoMode();
-        mementoDemo();
+        //mementoDemo();
+        //状态模式
+        //stateMode();
+        //stateDemo();
+        stateThreadDemo();
+    }
+
+    private static void stateThreadDemo() {
+        ThreadContext context=new ThreadContext();
+        context.start();
+        context.getCPU();
+        context.suspend();
+        context.resume();
+        context.getCPU();
+        context.stop();
+    }
+
+    private static void stateDemo() {
+        ScoreContext account = new ScoreContext();
+        System.out.println("学生成绩状态测试：");
+        account.add(30);
+        account.add(40);
+        account.add(25);
+        account.add(-15);
+        account.add(-25);
+    }
+
+    private static void stateMode() {
+        StateContext context = new StateContext();    //创建环境
+        context.handle();    //处理请求
+        context.handle();
+        context.handle();
+        context.handle();
     }
 
     private static void mementoDemo() {

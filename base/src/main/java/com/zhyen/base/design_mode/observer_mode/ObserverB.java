@@ -1,4 +1,4 @@
-package com.zhyen.base.design_mode.observer;
+package com.zhyen.base.design_mode.observer_mode;
 
 /**
  * 具体的观察者
