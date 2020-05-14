@@ -50,7 +50,11 @@ import com.zhyen.base.design_mode.observer_mode.ConcreteSubject;
 import com.zhyen.base.design_mode.observer_mode.ObserverA;
 import com.zhyen.base.design_mode.observer_mode.ObserverB;
 import com.zhyen.base.design_mode.prototype_mode.ConcretePrototype;
-import com.zhyen.base.design_mode.proxy.Proxy;
+import com.zhyen.base.design_mode.proxy.UML.Proxy;
+import com.zhyen.base.design_mode.proxy.dynamic.Buyer1;
+import com.zhyen.base.design_mode.proxy.dynamic.Buyer2;
+import com.zhyen.base.design_mode.proxy.dynamic.DynamicProxy;
+import com.zhyen.base.design_mode.proxy.dynamic.ISubject;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
 import com.zhyen.base.design_mode.state_mode.UML.StateContext;
@@ -115,14 +119,35 @@ public class DesignMode {
          */
         //代理模式
         proxy();
+        dynamic();
+    }
+
+    private static void dynamic() {
+        // 1. 创建调用处理器类对象
+        DynamicProxy DynamicProxy = new DynamicProxy();
+
+        // 2. 创建目标对象对象
+        Buyer1 mBuyer1 = new Buyer1();
+
+        // 3. 创建动态代理类 & 对象：通过调用处理器类对象newProxyInstance（）
+        // 传入上述目标对象对象
+        ISubject Buyer1_DynamicProxy = (ISubject) DynamicProxy.newProxyInstance(mBuyer1);
+
+        // 4. 通过调用动态代理对象方法从而调用目标对象方法
+        // 实际上是调用了invoke（），再通过invoke（）里的反射机制调用目标对象的方法
+        Buyer1_DynamicProxy.buy();
+        // 以上代购为小成代购Mac
+
+        // 以下是代购为小何代购iPhone
+        Buyer2 mBuyer2 = new Buyer2();
+        ISubject Buyer2_DynamicProxy = (ISubject) DynamicProxy.newProxyInstance(mBuyer2);
+        Buyer2_DynamicProxy.buy();
     }
 
     private static void proxy() {
         Proxy proxy = new Proxy();
         proxy.request();
     }
-
-    
 
     private static void stateThreadDemo() {
         ThreadContext context = new ThreadContext();

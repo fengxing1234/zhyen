@@ -1,6 +1,6 @@
-package com.zhyen.base.design_mode.proxy;
+package com.zhyen.base.design_mode.proxy.UML;
 
-public class Proxy {
+public class Proxy implements ISubject {
 
     private ISubject subject;
 
@@ -8,6 +8,7 @@ public class Proxy {
         subject = new RealSubject();
     }
 
+    @Override
     public void request() {
         preRequest();
         subject.request();
