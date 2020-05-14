@@ -4,6 +4,9 @@ import com.zhyen.base.design_mode.abstract_factory.factory.HaierFactory;
 import com.zhyen.base.design_mode.abstract_factory.factory.TCLFactory;
 import com.zhyen.base.design_mode.abstract_factory.product_air.IAirConditioner;
 import com.zhyen.base.design_mode.abstract_factory.product_tv.ITelevision;
+import com.zhyen.base.design_mode.adapter_mode.UML.ClassAdapter;
+import com.zhyen.base.design_mode.adapter_mode.demo.ElectricAdapter;
+import com.zhyen.base.design_mode.adapter_mode.demo.OpticalAdapter;
 import com.zhyen.base.design_mode.builder.Computer;
 import com.zhyen.base.design_mode.builder.Computer2;
 import com.zhyen.base.design_mode.builder.Director;
@@ -118,8 +121,24 @@ public class DesignMode {
          * 结构型模式
          */
         //代理模式
-        proxy();
-        dynamic();
+        //proxy();
+        //动态代理
+        //dynamic();
+        //适配器模式
+        //adapterMode();
+        adapterDemo();
+    }
+
+    private static void adapterDemo() {
+        ElectricAdapter adapter = new ElectricAdapter();
+        adapter.drive();
+        OpticalAdapter opticalAdapter = new OpticalAdapter();
+        opticalAdapter.drive();
+    }
+
+    private static void adapterMode() {
+        ClassAdapter adapter = new ClassAdapter();
+        adapter.request();
     }
 
     private static void dynamic() {
