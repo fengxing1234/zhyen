@@ -50,6 +50,7 @@ import com.zhyen.base.design_mode.observer_mode.ConcreteSubject;
 import com.zhyen.base.design_mode.observer_mode.ObserverA;
 import com.zhyen.base.design_mode.observer_mode.ObserverB;
 import com.zhyen.base.design_mode.prototype_mode.ConcretePrototype;
+import com.zhyen.base.design_mode.proxy.Proxy;
 import com.zhyen.base.design_mode.simple_factory.IPlasticProduct;
 import com.zhyen.base.design_mode.simple_factory.PlasticFactory;
 import com.zhyen.base.design_mode.state_mode.UML.StateContext;
@@ -107,11 +108,24 @@ public class DesignMode {
         //状态模式
         //stateMode();
         //stateDemo();
-        stateThreadDemo();
+        //stateThreadDemo();
+
+        /**
+         * 结构型模式
+         */
+        //代理模式
+        proxy();
     }
 
+    private static void proxy() {
+        Proxy proxy = new Proxy();
+        proxy.request();
+    }
+
+    
+
     private static void stateThreadDemo() {
-        ThreadContext context=new ThreadContext();
+        ThreadContext context = new ThreadContext();
         context.start();
         context.getCPU();
         context.suspend();
