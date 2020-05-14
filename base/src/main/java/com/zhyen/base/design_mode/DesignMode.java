@@ -42,6 +42,10 @@ import com.zhyen.base.design_mode.mediator_mode.AbstractMediator;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueA;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteColleagueB;
 import com.zhyen.base.design_mode.mediator_mode.ConcreteMediator;
+import com.zhyen.base.design_mode.memento_mode.UML.Caretaker;
+import com.zhyen.base.design_mode.memento_mode.UML.Originator;
+import com.zhyen.base.design_mode.memento_mode.demo.GirlStack;
+import com.zhyen.base.design_mode.memento_mode.demo.You;
 import com.zhyen.base.design_mode.observer.ConcreteSubject;
 import com.zhyen.base.design_mode.observer.ObserverA;
 import com.zhyen.base.design_mode.observer.ObserverB;
@@ -92,7 +96,49 @@ public class DesignMode {
         //strategyUML();
         //迭代器模式
         //iterator();
-        interpreterMode();
+        //interpreterMode();
+        //备忘录模式
+        //mementoMode();
+        mementoDemo();
+    }
+
+    private static void mementoDemo() {
+        You you = new You();
+        GirlStack girlStack = new GirlStack();
+        you.setFiancee("西施");
+        //保存状态
+        girlStack.push(you.createGirl());
+        System.out.println("当前选择的美女是" + you.getFiancee());
+
+        you.setFiancee("貂蝉");
+        girlStack.push(you.createGirl());
+        System.out.println("当前选择的美女是" + you.getFiancee());
+
+        you.setFiancee("王昭君");
+        girlStack.push(you.createGirl());
+        System.out.println("当前选择的美女是" + you.getFiancee());
+
+        you.restoreGirl(girlStack.pop());
+        System.out.println("返回了选择上一个美女" + you.getFiancee());
+
+        you.restoreGirl(girlStack.pop());
+        System.out.println("返回了选择上一个美女" + you.getFiancee());
+
+        you.restoreGirl(girlStack.pop());
+        System.out.println("返回了选择上一个美女" + you.getFiancee());
+
+    }
+
+    private static void mementoMode() {
+        Originator originator = new Originator();
+        Caretaker caretaker = new Caretaker();
+        originator.setState("S0");
+        System.out.println("初始状态:" + originator.getState());
+        caretaker.setMemento(originator.createMemento()); //保存状态
+        originator.setState("S1");
+        System.out.println("新的状态:" + originator.getState());
+        originator.restoreMemento(caretaker.getMemento()); //恢复状态
+        System.out.println("恢复状态:" + originator.getState());
     }
 
     private static void interpreterMode() {
