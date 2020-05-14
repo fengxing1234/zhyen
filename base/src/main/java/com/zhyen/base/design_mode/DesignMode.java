@@ -7,6 +7,10 @@ import com.zhyen.base.design_mode.abstract_factory.product_tv.ITelevision;
 import com.zhyen.base.design_mode.adapter_mode.UML.ClassAdapter;
 import com.zhyen.base.design_mode.adapter_mode.demo.ElectricAdapter;
 import com.zhyen.base.design_mode.adapter_mode.demo.OpticalAdapter;
+import com.zhyen.base.design_mode.bridge_mode.HandBag;
+import com.zhyen.base.design_mode.bridge_mode.Red;
+import com.zhyen.base.design_mode.bridge_mode.Wallet;
+import com.zhyen.base.design_mode.bridge_mode.Yellow;
 import com.zhyen.base.design_mode.builder.Computer;
 import com.zhyen.base.design_mode.builder.Computer2;
 import com.zhyen.base.design_mode.builder.Director;
@@ -35,6 +39,9 @@ import com.zhyen.base.design_mode.command_mode.UML.HeFenCommand;
 import com.zhyen.base.design_mode.command_mode.UML.HunTunCommand;
 import com.zhyen.base.design_mode.command_mode.UML.Invoke;
 import com.zhyen.base.design_mode.command_mode.UML.Waiter;
+import com.zhyen.base.design_mode.decorator_mode.ConcreteComponent;
+import com.zhyen.base.design_mode.decorator_mode.ConcreteDecorator;
+import com.zhyen.base.design_mode.decorator_mode.IComponent;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
@@ -126,7 +133,29 @@ public class DesignMode {
         //dynamic();
         //适配器模式
         //adapterMode();
-        adapterDemo();
+        //adapterDemo();
+        //桥梁模式
+        //bridgeMode();
+        //装饰者模式
+        decoratorMode();
+    }
+
+    private static void decoratorMode() {
+        IComponent p = new ConcreteComponent();
+        p.operation();
+        System.out.println("---------------------------------");
+        IComponent d = new ConcreteDecorator(p);
+        d.operation();
+    }
+
+    private static void bridgeMode() {
+        Wallet wallet = new Wallet();
+        wallet.setColor(new Red());
+        System.out.println(wallet.getName());
+        HandBag handBag = new HandBag();
+        handBag.setColor(new Yellow());
+        handBag.getName();
+        System.out.println(handBag.getName());
     }
 
     private static void adapterDemo() {
