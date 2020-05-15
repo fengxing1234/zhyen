@@ -42,6 +42,7 @@ import com.zhyen.base.design_mode.command_mode.UML.Waiter;
 import com.zhyen.base.design_mode.decorator_mode.ConcreteComponent;
 import com.zhyen.base.design_mode.decorator_mode.ConcreteDecorator;
 import com.zhyen.base.design_mode.decorator_mode.IComponent;
+import com.zhyen.base.design_mode.facade_mode.Facade;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
@@ -137,7 +138,14 @@ public class DesignMode {
         //桥梁模式
         //bridgeMode();
         //装饰者模式
-        decoratorMode();
+        //decoratorMode();
+        //外观模式
+        facadeMode();
+    }
+
+    private static void facadeMode() {
+        Facade facade = new Facade();
+        facade.method();
     }
 
     private static void decoratorMode() {
