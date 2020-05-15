@@ -46,6 +46,9 @@ import com.zhyen.base.design_mode.facade_mode.Facade;
 import com.zhyen.base.design_mode.factory_method.DatabaseFactory;
 import com.zhyen.base.design_mode.factory_method.FileLogFactory;
 import com.zhyen.base.design_mode.factory_method.ILog;
+import com.zhyen.base.design_mode.flyweight_mode.FlyweightFactory;
+import com.zhyen.base.design_mode.flyweight_mode.IFlyweight;
+import com.zhyen.base.design_mode.flyweight_mode.UnsharedConcreteFlyweight;
 import com.zhyen.base.design_mode.interpreter_mode.InterpreterContext;
 import com.zhyen.base.design_mode.iterator_mode.ConcreteAggregate;
 import com.zhyen.base.design_mode.iterator_mode.IIterator;
@@ -140,7 +143,23 @@ public class DesignMode {
         //装饰者模式
         //decoratorMode();
         //外观模式
-        facadeMode();
+        //facadeMode();
+        //响元模式
+        flyweightMode();
+    }
+
+    private static void flyweightMode() {
+        FlyweightFactory factory = new FlyweightFactory();
+        IFlyweight f01 = factory.getFlyweight("1");
+        IFlyweight f02 = factory.getFlyweight("1");
+        IFlyweight f03 = factory.getFlyweight("1");
+        IFlyweight f11 = factory.getFlyweight("b");
+        IFlyweight f12 = factory.getFlyweight("b");
+        f01.operation(new UnsharedConcreteFlyweight("第1次调用a。"));
+        f02.operation(new UnsharedConcreteFlyweight("第2次调用a。"));
+        f03.operation(new UnsharedConcreteFlyweight("第3次调用a。"));
+        f11.operation(new UnsharedConcreteFlyweight("第1次调用b。"));
+        f12.operation(new UnsharedConcreteFlyweight("第2次调用b。"));
     }
 
     private static void facadeMode() {
