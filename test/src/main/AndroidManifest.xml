@@ -2,8 +2,8 @@
     package="com.zhyen.test">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application>
         <activity android:name=".TestMainActivity" />
@@ -18,5 +18,15 @@
         <activity android:name=".ui.activity.custom_view.TestViewAnimationActivity" />
         <activity android:name=".ui.activity.custom_view.TestAnimatorEvaluatorActivity" />
         <activity android:name=".ui.activity.custom_view.TestHardwareAcceleratedActivity" />
+
+        <service
+            android:name=".AidlBookService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.zhyen.test.action" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>

@@ -39,6 +39,15 @@
         <activity android:name=".ui.activity.custom_view.TestViewAnimationActivity" />
         <activity android:name=".ui.activity.custom_view.TestAnimatorEvaluatorActivity" />
         <activity android:name=".ui.activity.custom_view.TestHardwareAcceleratedActivity" />
+        <service
+            android:name=".AidlBookService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.zhyen.test.action" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

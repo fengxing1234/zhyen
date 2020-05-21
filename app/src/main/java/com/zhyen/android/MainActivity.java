@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zhyen.android.test.TestAIDLActivity;
 import com.zhyen.android.test.test_activity.TestSamplePictureActivity;
 import com.zhyen.android.test.test_activity.TestWidgetActivity;
 import com.zhyen.android.test.test_interview.TestAnnotation;
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
             String value = annotation.value();
             Log.d(TAG, "name = " + name + " ,index = " + index + ", value = " + value);
         }
+
+        findViewById(R.id.btn_aidl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TestAIDLActivity.class));
+            }
+        });
 
         for (Method method : clazz.getMethods()) {
             String methodName = method.getName();

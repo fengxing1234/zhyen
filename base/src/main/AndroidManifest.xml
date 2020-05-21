@@ -1,2 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhyen.base" />
+    package="com.zhyen.base">
+
+    <application>
+        <service
+            android:name=".AIDLService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":zhyen_remote">
+            <intent-filter>
+                <action android:name="com.zhyen.base.action" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

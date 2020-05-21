@@ -41,6 +41,7 @@
         <activity android:name=".test.test_activity.TestListPopupWindowActivity" />
         <activity android:name=".test.test_activity.TestSamplePictureActivity" />
         <activity android:name=".test.test_activity.TestWidgetActivity" />
+        <activity android:name=".test.TestAIDLActivity"/>
 
         <provider
             android:name=".test.test_provider.TestPictureProvider"
