@@ -7,9 +7,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zhyen.android.test.TestAIDLActivity;
+import com.zhyen.android.test.test_aidl.TestAIDLActivity;
 import com.zhyen.android.test.test_activity.TestSamplePictureActivity;
 import com.zhyen.android.test.test_activity.TestWidgetActivity;
+import com.zhyen.android.test.test_aidl.TestAidlMessageActivity;
 import com.zhyen.android.test.test_interview.TestAnnotation;
 import com.zhyen.android.test.test_interview.TestAnnotationRunTime;
 
@@ -56,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TestAIDLActivity.class));
+            }
+        });
+
+        findViewById(R.id.btn_aidl_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TestAidlMessageActivity.class));
             }
         });
 

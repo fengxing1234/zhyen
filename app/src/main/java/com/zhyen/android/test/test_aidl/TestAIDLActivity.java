@@ -1,4 +1,4 @@
-package com.zhyen.android.test;
+package com.zhyen.android.test.test_aidl;
 
 import android.content.ComponentName;
 import android.content.Context;

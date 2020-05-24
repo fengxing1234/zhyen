@@ -31,5 +31,11 @@
         android:layout_height="wrap_content"
         android:text="aidl测试" />
 
+    <Button
+        android:id="@+id/btn_aidl_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aidl实现多进程消息推送" />
+
 
 </LinearLayout>

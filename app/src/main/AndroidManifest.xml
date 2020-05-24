@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhyen.android">
 
+    <permission
+        android:name="com.zhyen.android.permission.REMOTE_SERVICE_PERMISSION"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.zhyen.android.permission.REMOTE_SERVICE_PERMISSION" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,6 +17,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".ZhyenApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -41,7 +48,8 @@
         <activity android:name=".test.test_activity.TestListPopupWindowActivity" />
         <activity android:name=".test.test_activity.TestSamplePictureActivity" />
         <activity android:name=".test.test_activity.TestWidgetActivity" />
-        <activity android:name=".test.TestAIDLActivity"/>
+        <activity android:name=".test.test_aidl.TestAIDLActivity" />
+        <activity android:name=".test.test_aidl.TestAidlMessageActivity" />
 
         <provider
             android:name=".test.test_provider.TestPictureProvider"
@@ -58,6 +66,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public"></meta-data>
         </provider>
+
+        <service
+            android:name=".test.test_aidl.MessageService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
     </application>
 
 
