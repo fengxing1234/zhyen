@@ -18,16 +18,6 @@ public class ZhyenApplication extends Application {
     }
 
     /**
-     * 当终止应用程序对象时调用，不保证一定被调用，当程序被内核终止以便为其他应用程序释放资源时将不会提醒，
-     * 并且不调用应用程序对象的onTerminate方法而直接终止进程
-     */
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        Log.d(TAG, "onTerminate: ");
-    }
-
-    /**
      * onLowMemory——当后台程序已经终止且资源还匮乏时会调用这个方法。
      * 好的应用程序会在此释放资源。
      */

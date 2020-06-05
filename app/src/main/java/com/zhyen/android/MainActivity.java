@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            ClassLoader classLoader = getClassLoader();
+            Class<?> aClass = classLoader.loadClass("");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         findViewById(R.id.btn_pic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
