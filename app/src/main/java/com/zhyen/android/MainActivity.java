@@ -7,9 +7,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zhyen.android.test.test_aidl.TestAIDLActivity;
 import com.zhyen.android.test.test_activity.TestSamplePictureActivity;
 import com.zhyen.android.test.test_activity.TestWidgetActivity;
+import com.zhyen.android.test.test_aidl.TestAIDLActivity;
 import com.zhyen.android.test.test_aidl.TestAidlMessageActivity;
 import com.zhyen.android.test.test_interview.TestAnnotation;
 import com.zhyen.android.test.test_interview.TestAnnotationRunTime;
