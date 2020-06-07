@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zhyen.base.annotation.Test;
 import com.zhyen.test.video_view_demo.DemoVideoViewActivity;
 
 public class TestMainActivity extends AppCompatActivity {
@@ -19,6 +20,13 @@ public class TestMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(TestMainActivity.this, DemoVideoViewActivity.class));
+            }
+        });
+        findViewById(R.id.btn_annotation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Test test = new Test();
+                test.main(TestMainActivity.this);
             }
         });
     }
