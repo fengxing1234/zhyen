@@ -46,4 +46,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':base')
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
